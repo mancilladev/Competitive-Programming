@@ -1,33 +1,39 @@
 #include <iostream>
-#include "funcspe.cpp"
+#include <vector>
+#include <string>
 
-#define MAX 1000
-#define MIN -1000
-#define BIGGEST_EXPECTED 87400
+using namespace std;
+typedef long long ll;
+typedef vector<int> vi;
+#define F(i,L,R) for(int i=L; i<R; i++)
+#define FE(i,L,R) for(int i=L; i<=R; i++)
+#define FFE(i,L,R) for (int i = L; i >= R; i--)
+#define DBG(vari) cout<<#vari<<" = "<<(vari)<<endl;
+#define spresent(str1,str2) (str1.find(str2) != string::npos)
 
-int main(void)
-{
-    // Max repetitions, a, b
-    int max_values[] {0,0,0};
-    int temp_consecutive_primes, n;
-    int* prime_list{SieveUntil(BIGGEST_EXPECTED)};
 
-    for (int a = MIN; a < MAX; ++a) {
-        for (int b = a; b <= MAX; ++b) {
-            temp_consecutive_primes = n = 0;
-            while (prime_list[n*n+n*a+b]) {
-                ++n;
-                ++temp_consecutive_primes;
-            }
-            if (temp_consecutive_primes > max_values[0]) {
-                max_values[0] = temp_consecutive_primes;
-                max_values[1] = a;
-                max_values[2] = b;
-            }
-        }
+void sieve(vector<ll>& v) {
+    v[0] = 0;
+    v[1] = 0;
+    for(int i=2; i*i<v.size(); i++) {
+        if(v[i]) for(int j=i*i; j<v.size(); j+=i) v[j] = 0;
     }
+}
 
-    std::cout << max_values[0] << std::endl;
-    std::cout << max_values[1]*max_values[2] << std::endl;
-    return 0;
+
+int main() {
+    vector<ll> v(100000, 1);
+    sieve(v);
+
+    int big = 0, N = 0;
+    int mult;
+    FE(a,-999,999)
+        FE(b,-1000,1000) {
+            F(n,0,80)
+                if(n*n + a*n + b < 0 || v[n*n + a*n + b] == 0) { N = max(N, n); break; }
+            if(N>big) { big = N; mult = a*b;}
+        }
+
+    DBG(mult);
+    DBG(big);
 }
