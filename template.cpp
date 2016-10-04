@@ -1,39 +1,37 @@
 #include <iostream>
+#include <sstream>
+#include <cstdio>
+#include <cmath>
+#include <cstring>
+#include <cctype>
 #include <string>
 #include <vector>
-#include <algorithm>
+#include <list>
 #include <set>
 #include <map>
-
-using namespace std;
-typedef long long ll;
-typedef pair<int, int> ii;
-typedef vector<int> vi;
-typedef vector<vi> vvi;
-typedef vector<ii> vii;
-typedef vector<string> vs;
-#define INF 1000000000
-#define abs(x) (x<0?(-x):x) // big bug here if "-x" is not surrounded by "()"
-#define F(i,L,R) for (int i = L; i < R; i++) //next four are for "for loops"
-#define FE(i,L,R) for (int i = L; i <= R; i++)
-#define FF(i,L,R) for (int i = L; i > R; i--)
-#define FFE(i,L,R) for (int i = L; i >= R; i--)
-#define DBG(vari) cout<<#vari<<" = "<<(vari)<<endl;
-// power up C++
-#define sz(a) int((a).size())
-#define pb push_back
-#define all(c) (c).begin(),(c).end()
-#define tr(c,i) for(decltype((c).begin()) i = (c).begin(); i != (c).end(); i++)
-#define present(c,x) ((c).find(x) != (c).end())
-#define vpresent(v,x) (find(all(v),x) != (v).end())
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include <functional>
+using namespace std; 
+#define DEBUG(x) cout << '>' << #x << ':' << x << endl;
+#define REP(i,n) for(int i=0;i<(n);i++)
+#define FOR(i,a,b) for(int i=(a);i<=(b);i++)
+#define FORD(i,a,b) for(int i=(a);i>=(b);i--)
 #define spresent(str1,str2) (str1.find(str2) != string::npos)
-// F(u,0,n){F(w,0,m)cout<<array[u][w]<<" ";cout<<endl;} print Matrix
-// int array[n][m] = {}; this initializes array with zeros
-// std::transform(str.begin(), str.end(), str.begin(), ::tolower); lowercase string
-
-int main() {
-    ll n;
-    while(cin>>n) {
-    }
+inline bool EQ(double a, double b) { return fabs(a-b) < 1e-9; }
+const int INF = 1<<29;
+typedef long long ll;
+inline int two(int n) { return 1 << n; }
+inline int test(int n, int b) { return (n>>b)&1; }
+inline void set_bit(int & n, int b) { n |= two(b); }
+inline void unset_bit(int & n, int b) { n &= ~two(b); }
+inline int last_bit(int n) { return n & (-n); }
+inline int ones(int n) { int res = 0; while(n && ++res) n-=n&(-n); return res; }
+template<class T> void chmax(T & a, const T & b) { a = max(a, b); }
+template<class T> void chmin(T & a, const T & b) { a = min(a, b); }
+/////////////////////////////////////////////////////////////////////
+int main()
+{
     return 0;
 }
