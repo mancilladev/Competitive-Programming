@@ -1,15 +1,30 @@
 #include <iostream>
 #include <vector>
-#include <string>
-
+#include <cmath>
 using namespace std;
-typedef long long ll;
-typedef vector<int> vi;
-#define F(i,L,R) for(int i=L; i<R; i++)
-#define FFE(i,L,R) for (int i = L; i >= R; i--)
-#define DBG(vari) cout<<#vari<<" = "<<(vari)<<endl;
-#define spresent(str1,str2) (str1.find(str2) != string::npos)
+
+vector<int> digits(int n) {
+        vector<int> v;
+        while(n) {
+                v.push_back(n%10);
+                n = n/10;
+        }
+        return v;
+}
+
 
 int main() {
-    vi v;
+        long long total = 0;
+        for (int i = 11; i < 531441; i++) {
+                vector<int> d = digits(i);
+
+                int sumd = 0;
+                for (auto& n : d) sumd += pow(n,5);
+
+                if (sumd == i) {
+                        total += sumd;
+                }
+        }
+        cout<<total<<endl;
+
 }
