@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cmath>
-#include <climits>
 #define MAX 10000
 using namespace std;
 
