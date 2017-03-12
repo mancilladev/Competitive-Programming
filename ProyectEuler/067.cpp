@@ -1,51 +1,45 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <iomanip>
 #include <fstream>
-#include "funcspe.cpp"
+#include <sstream>
 
 #define MAX 100
+
+using namespace std;
 
 int main(void)
 {
     int triangle[MAX][MAX], counter = 0;
-    long maximum = 0;
-    std::vector<std::string> result;
+    int ans = 0;
+    vector<string> result;
 
-    std::fstream file("file_067.txt");
-    std::string str;
-    
-    std::getline(file, str);
-    std::istringstream iss(str);
+    ifstream file;
+    file.open("file_067.txt");
 
-    for(std::string str; iss >> str; )
+    string str;
+
+    while (file >> str)
         result.push_back(str);
 
-    for (int i = 0; i < MAX; ++i) {
-        for (int j = 0; j <= i; ++j) {
-            triangle[i][j] = std::stoi(result[counter++]);
-            std::cout << triangle[i][j] << " ";
+    for (int i = 0; i < MAX; i++)
+        for (int j = 0; j <= i; j++)
+            triangle[i][j] = stoi(result[counter++]);
+
+    for (int i = 1; i < MAX; i++) {
+        for (int j = 0; j <= i; j++) {
+            if (j == 0)
+                    triangle[i][j] += triangle[i-1][j];
+            else if (j == i)
+                    triangle[i][j] += triangle[i-1][j-1];
+            else
+                    triangle[i][j] += max(triangle[i-1][j], triangle[i-1][j-1]);
         }
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
-
-    for (int i = 1; i < MAX; ++i) {
-        for (int j = 0; j <= i; ++j) {
-            if (j == 0) triangle[i][j] += triangle[i-1][j];
-            else if (j == i) triangle[i][j] += triangle[i-1][j-1];
-            else triangle[i][j] += Max(triangle[i-1][j],triangle[i-1][j-1]);
-            std::cout << triangle[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
-
-    for (int j = 0; j < MAX; ++j) {
-        if (triangle[MAX-1][j] > maximum) maximum = triangle[MAX-1][j];
     }
 
-    std::cout << maximum << std::endl;
+    for (int j = 0; j < MAX; j++)
+        ans = max(ans, triangle[MAX-1][j]);
+
+    cout << ans << endl;
     return 0;
 }
