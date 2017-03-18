@@ -4,7 +4,7 @@
 #define KEY 1
 using namespace std;
 
-vector<bool> isprime(10000000, 1);
+vector<bool> isprime(1000000, 1);
 vector<int> primes;
 
 int len(int n) {
