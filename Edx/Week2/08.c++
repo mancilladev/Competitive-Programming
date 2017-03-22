@@ -6,18 +6,19 @@
 #include <queue>
 #include <stack>
 using namespace std;
-
-struct Table {
+ 
+ struct Table
+ {
         deque<int>* main;
         deque<int>* sec;
-} ;
-  
+ };
+
 int main() {
 #ifdef JUDGE
-freopen("input.txt", "rt", stdin);
-freopen("output.txt", "wt", stdout);
+        freopen("input.txt", "rt", stdin);
+        freopen("output.txt", "wt", stdout);
 #endif
-ios::sync_with_stdio(false);
+        ios::sync_with_stdio(false);
 
         int n; cin >> n;
 
@@ -44,19 +45,15 @@ ios::sync_with_stdio(false);
                                 t.sec->pop_back();
                         }
                 }
-                else if ((t.main->size() + t.sec->size()) > 1) {
+                else if (s[0] == 'm' && (t.main->size() + t.sec->size()) > 1) {
+                        if ((t.main->size() + t.sec->size())%2 == 1) {
+                                t.sec->push_front(t.main->back());
+                                t.main->pop_back();
+                        }
                         deque<int>* tmp = t.main;
                         t.main = t.sec;
                         t.sec = tmp;
                 }
-                /*
-                for (auto x: *t.main)
-                        cout << x << ' ';
-                cout << "| ";
-                for (auto x: *t.sec)
-                        cout << x << ' ';
-                cout << '\n';
-                */
         }
 
         cout << (t.main->size() + t.sec->size()) << endl;
