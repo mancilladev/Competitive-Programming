@@ -7,10 +7,9 @@ std::ofstream cout("output.txt");
 using std::cin;
 using std::cout;
 #endif
-  
+using namespace std;
+
 int main() {
-    int a, b;
-    cin >> a >> b;
-    cout << a + b << std::endl;
+    int n; cin >> n;
     return 0;
 }
