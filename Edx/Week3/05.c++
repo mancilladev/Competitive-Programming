@@ -7,38 +7,40 @@ std::ofstream cout("output.txt");
 using std::cin;
 using std::cout;
 #endif
+#include <set>
 #include <vector>
 #include <algorithm>
 using namespace std;
 
 int main() {
-    int n;
+    int n, tmp;
     cin >> n;
 
-    vector<int> v(n);
+    multiset<int> st;
     for (int i = 0; i < n; i++)
-        cin >> v[i];
+        cin >> tmp, st.insert(tmp);
 
     int k;
     cin >> k;
 
-    sort(v.begin(), v.end(), [](int a, int b){return a>b;});
-
     int t = 0;
-    int tmp, i;
-    while (true) {
-        if (v[0] - t <= 0) break;
-        v[0] = max(v[0]-(k-1), 0);
-        t++;
+    int i;
+    while (n > 1) {
+        auto rit = st.rbegin();
+        if (*rit - t <= 0) break;
 
-        i = 1;
-        while (i < n && v[i-1] < v[i]) {
-            tmp = v[i-1];
-            v[i-1] = v[i];
-            v[i] = tmp;
-            i++;
-        }
+        tmp = max(*rit-(k-1), 0);
+        rit++;
+        while (*(rit) <= tmp && tmp - t > 1)
+            tmp = max(tmp-(k-1), 0), t++;
+        rit--;
+        st.erase(next(rit).base());
+        st.insert(tmp);
+        t++;
     }
+
+    if (n == 1)
+        t = *st.begin()/k + (*st.begin()%k ? 1 : 0);
 
     cout << t << '\n';
 
