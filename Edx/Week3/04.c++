@@ -27,7 +27,14 @@ int main() {
         a2 = tmp;
     }
 
-    sort(v.begin(), v.end());
+    if (k1 > n/2) {
+        nth_element(v.begin(), v.begin()+k1-1, v.end());
+        sort(v.begin()+k1-1, v.end());
+    }
+    else {
+        nth_element(v.begin(), v.begin()+k2, v.end());
+        sort(v.begin(), v.begin()+k2);
+    }
     for (int i = k1-1; i < k2; i++)
         cout << v[i] << ' ';
     cout << '\n';
