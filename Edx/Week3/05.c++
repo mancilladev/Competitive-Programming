@@ -11,38 +11,51 @@ using std::cout;
 #include <vector>
 #include <algorithm>
 using namespace std;
+int n, k;
+
+bool check(auto &v, int _val) {
+    int cnt = 0;
+    for (int i = 0; i < n; i++) {
+        if (v[i] > _val) {
+            double kk = (v[i]*1.0 - _val)/(k-1);
+            cnt += kk;
+            if (kk - (int)kk > 0)
+                cnt++;
+            if (cnt > _val)
+                return false;
+        }
+    }
+    return cnt <= _val;
+}
+
+int binSearch(auto &v, int _low, int _high) {
+    int left = _low;
+    int right = _high;
+    int mid;
+    int ans = _high;
+    while (left <= right) {
+        mid = left + (right - left)/2;
+        if (check(v, mid))
+            ans = mid, right = mid - 1;
+        else
+            left = mid + 1;
+    }
+    return ans;
+}
 
 int main() {
-    int n, tmp;
     cin >> n;
 
-    multiset<int> st;
-    for (int i = 0; i < n; i++)
-        cin >> tmp, st.insert(tmp);
-
-    int k;
-    cin >> k;
-
-    int t = 0;
-    int i;
-    while (n > 1) {
-        auto rit = st.rbegin();
-        if (*rit - t <= 0) break;
-
-        tmp = max(*rit-(k-1), 0);
-        rit++;
-        while (*(rit) <= tmp && tmp - t > 1)
-            tmp = max(tmp-(k-1), 0), t++;
-        rit--;
-        st.erase(next(rit).base());
-        st.insert(tmp);
-        t++;
+    vector<int> v(n);
+    int maxV = 0;
+    for (int i = 0; i < n; i++) {
+        cin >> v[i];
+        maxV = max(maxV, v[i]);
     }
 
-    if (n == 1)
-        t = *st.begin()/k + (*st.begin()%k ? 1 : 0);
+    cin >> k;
 
-    cout << t << '\n';
+    cout << (k == 1 ? maxV : binSearch(v, 0, maxV)) << endl;
 
     return 0;
 }
