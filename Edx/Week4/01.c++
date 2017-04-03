@@ -5,55 +5,65 @@ std::ofstream cout("output.txt");
 #else
 #include <iostream>
 #endif
+#include <algorithm>
 #include <vector>
+#include <map>
+#include <set>
 using namespace std;
-int n;
-vector<int> stack;
 
-bool dfs(auto &matrix, int v, auto &color) {
+int n, m, last;
+map<int, set<int> > graph;
+vector<int> stack, color;
+
+bool dfs(auto v) {
     color[v] = 1;
-    stack.push_back(v);
-    cout << v << '\n';
-    for (int u = 0; u < n; ++u) {
-        if (!matrix[v][u])
-            continue;
-        if (color[u] == 0 && dfs(matrix, u, color))
-            return true;
-        if (color[u] == 1)
-            return true;
+    if (graph.count(v) > 0) {
+        stack.push_back(v);
+        for (auto &u: graph[v]) {
+            if (color[u] == 0 && dfs(u))
+                return true;
+            if (color[u] == 1) {
+                last = u;
+                return true;
+            }
+        }
+        stack.pop_back();
     }
     color[v] = 2;
-    stack.pop_back();
-    cout << v << '\n';
     return false;
 }
 
-void solve(auto &matrix) {
-    vector<int> color(n, 0);
-    for (int i = 0; i < n; ++i) {
-        stack.clear();
-        cout << i << endl;
-        if (color[i] == 0 && dfs(matrix, i, color)) {
-            cout << "YES" << '\n';
-            for (auto x: stack)
-                cout << x+1 << ' ';
-            cout << '\n';
-            return;
-        }
-        cout << endl;
-    }
-    cout << "NO" << '\n';
-}
-
 int main() {
-    cin >> n;
-    vector< vector<int> > matrix(n, vector<int>(n, 0));
-    for (int i = 0; i < n; ++i) {
-        int y, x; cin >> y >> x;
-        matrix[y-1][x-1] = 1;
+    cin >> n >> m;
+    color.resize(n+1, 0);
+    for (int i = 0; i < m; ++i) {
+        int key, val; cin >> key >> val;
+        if (graph.count(key) == 0)
+            graph[key] = {val};
+        else
+            graph[key].insert(val);
     }
 
-    solve(matrix);
+    bool acyclic = true;
+
+    for (auto &kv: graph) {
+        stack.clear();
+        if (color[kv.first] == 0 && dfs(kv.first)) {
+            acyclic = false;
+
+            cout << "YES\n";
+            auto it = stack.begin();
+            while (*it != last)
+                ++it;
+            while (it != stack.end())
+                cout << *it << ' ', ++it;
+            cout << '\n';
+
+            break;
+        }
+    }
+    
+    if (acyclic) cout << "NO\n";
 
     return 0;
 }
