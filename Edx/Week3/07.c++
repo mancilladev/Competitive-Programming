@@ -5,56 +5,63 @@ std::ofstream cout("output.txt");
 #else
 #include <iostream>
 #endif
-#include <tuple>
 #include <vector>
 #include <algorithm>
 using namespace std;
 
+struct Node {
+    double v, w, pos;
+} node;
+
+bool operator <(const Node& x, const Node& y) {
+    return x.v / x.w > y.v / y.w;
+}
+
+vector<Node> a, b;
+
+long long add(long long s, Node node) {
+    return s + node.v * node.w;
+}
+
+void mergeSort(int l, int r) {
+    if (l + 1 >= r) return;
+
+    int m = (l+r)/2;
+    mergeSort(l, m);
+    mergeSort(m, r);
+
+
+    int i, j, k;
+    i = k = l;
+    j = m;
+
+    long long s = add(0,a[0]);
+    while (i < m || j < r) {
+        if (j == r || (i < m && add(s,a[j]) > add(s,a[i])))
+            s = add(s,a[i]), b[k++] = a[i++];
+        else
+            s = add(s,a[j]), b[k++] = a[j++];
+    }
+
+    for (int i = l; i < r; ++i)
+        a[i] = b[i];
+}
+
 int main() {
     int n, k; cin >> n >> k;
-    vector< tuple<int, int, int> > S(n);
+    a.resize(n);
+    b.resize(n);
 
-    for (int i = 0; i < n; ++i) {
-        int v, w;
-        cin >> v >> w;
-        S[i] = make_tuple(v, w, i+1);
-    }
+    for (int i = 0; i < n; ++i)
+        cin >> a[i].v >> a[i].w, a[i].pos = i+1;
 
-    partial_sort(S.begin(), S.begin()+k, S.end(), [](auto &t1, auto &t2) {
-        int v1, w1, v2, w2, _;
-        tie(v1, w1, _) = t1;
-        tie(v2, w2, _) = t2;
-        return w1 < w2;
-    });
+    for (int i = 0; i < n; ++i) if (a[i] < a[0])
+        node = a[0], a[0] = a[i], a[i] = node;
 
-    sort(S.begin()+k, S.end(), [](auto &t1, auto &t2) {
-        int v1, w1, v2, w2, _;
-        tie(v1, w1, _) = t1;
-        tie(v2, w2, _) = t2;
-        return v1 > v2;
-    });
+    mergeSort(1, n);
 
-    int i = 0, j = k;
-    double top = 0, bot = 0;
-    while (k--) {
-        int v1, w1, v2, w2, p1, p2;
-        tie(v1, w1, p1) = S[i];
-        tie(v2, w2, p2) = S[j];
-        double newval1 = (top+v1)/(bot+w1);
-        double newval2 = (top+v2)/(bot+w2);
-        if (j >= n || newval1 > newval2) {
-            top += v1;
-            bot += w1;
-            cout << p1 << ' ';
-            ++i;
-        }
-        else {
-            top += v2;
-            bot += w2;
-            cout << p2 << ' ';
-            ++j;
-        }
-    }
+    for (int i = 0; i < k; ++i)
+        cout << a[i].pos << ' ';
     cout << '\n';
 
     return 0;

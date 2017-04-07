@@ -6,41 +6,56 @@ std::ofstream cout("output.txt");
 #include <iostream>
 #endif
 #include <set>
+#include <deque>
 #include <vector>
 #include <unordered_map>
 using namespace std;
 unordered_map<int, set<int> > graph;
 vector<int> color;
 
-bool dfsK2(int v, int c = 1) {
-    color[v] = c;
-    int nextc = (c==1) ? 2 : 1;
-    for (int u: graph[v]) {
-        if (color[u] == 0)
-            return dfsK2(u, nextc);
-        return (color[u] != color[v]);
+bool bfsK2(int src) {
+    if (color[src] != -1) return true;
+
+    color[src] = 1;
+    deque<int> q;
+    q.push_back(src);
+
+    while (!q.empty()) {
+        int v = q.front(); q.pop_front();
+        for (int u: graph[v]) {
+            if (color[u] == -1) {
+                color[u] = 1 - color[v];
+                q.push_back(u);
+            }
+            else if (color[u] == color[v])
+                return false;
+        }
     }
+
     return true;
 }
 
 bool isBipartite() {
-    for (auto &ve: graph) {
-        if (color[ve.first] == 0 && dfsK2(ve.first) == false)
-            return false;
-    }
+    for (auto &kv: graph) if (bfsK2(kv.first) == false)
+        return false;
     return true;
 }
 
 int main() {
     int V, E; cin >> V >> E;
-    color.resize(V+1, 0);
+    color.resize(V+1, -1);
 
     for (int i = 0; i < E; ++i) {
-        int k, v; cin >> k >> v;
-        if (graph.find(k) != graph.end())
-            graph[k].insert(v);
+        int u, v; cin >> u >> v;
+        if (graph.find(u) != graph.end())
+            graph[u].insert(v);
         else
-            graph[k] = {v};
+            graph[u] = {v};
+
+        if (graph.find(v) != graph.end())
+            graph[v].insert(u);
+        else
+            graph[v] = {u};
     }
 
     if (isBipartite()) cout << "YES\n";
