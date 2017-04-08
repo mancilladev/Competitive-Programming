@@ -5,9 +5,12 @@ std::ofstream cout("output.txt");
 #else
 #include <iostream>
 #endif
+#include <vector>
 using namespace std;
+int N;
 
 int main() {
-    int n; cin >> n;
+    cin >> N;
+
     return 0;
 }
