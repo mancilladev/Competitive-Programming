@@ -1,8 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
-#include <utility>
-#include <queue>
+#include <deque>
 #define F first
 #define S second
 #define PB push_back
@@ -10,17 +9,9 @@ typedef long long ll;
 using namespace std;
 
 struct Node {
-    ll l;
-    ll r;
-} node, n1, n2;
-
-bool operator <(const Node& x, const Node& y) {
-    return abs(x.r - x.l) < abs(y.r - y.l);
-}
-
-ll distance(ll a, ll b) {
-    return abs(a-b) - 1;
-}
+    ll size;
+    ll cnt;
+} node;
 
 int main() {
     ios_base::sync_with_stdio(0);
@@ -32,35 +23,52 @@ int main() {
     for (int t = 1; t <= T; ++t) {
         ll N, K; cin >> N >> K;
 
-        priority_queue<Node> q;
-        node.l = 0;
-        node.r = N+1;
-        q.push(node);
+        deque<Node> dq;
+        node.size = N;
+        node.cnt = 1;
+        dq.PB(node);
 
-        while (--K) {
-            node = q.top();
-            q.pop();
-            ll pos = (node.l + node.r)/2;
+        while (K > dq.front().cnt) {
+            node = dq.front();
+            K -= node.cnt;
+            dq.pop_front();
 
-            n1.l = node.l;
-            n1.r = pos;
+            Node child1, child2;
+            child2.size = (node.size-1)/2;
+            child1.size = (node.size - child2.size - 1);
 
-            n2.l = pos;
-            n2.r = node.r;
+            child1.cnt = node.cnt;
+            child2.cnt = node.cnt;
 
-            q.push(n1);
-            q.push(n2);
+            bool used1 = false, used2 = false;
+            for (ll i = 0; i < dq.size(); ++i) {
+                if (used1 && used2)
+                    break;
+                if (!used1 && dq[i].size == child1.size)
+                    dq[i].cnt += child1.cnt, used1 = true;
+                if (!used2 && dq[i].size == child2.size)
+                    dq[i].cnt += child2.cnt, used2 = true;
+            }
+
+            if (!used1 && !used2 && child2.size == child1.size)
+                child1.cnt += child2.cnt, dq.PB(child1);
+            else {
+                if (child2.size > child1.size)
+                    node = child2, child2 = child1, child1 = child2;
+                if (!used1)
+                    dq.PB(child1);
+                if (!used2)
+                    dq.PB(child2);
+            }
         }
 
-        node = q.top();
-        ll pos = (node.l + node.r)/2;
-        ll dL = distance(pos, node.l);
-        ll dR = distance(pos, node.r);
-
+        node = dq.front();
+        ll ans = (node.size - 1)/2;
         cout << "Case #" << t << ": ";
-        cout << max(dL, dR) << ' ' << min(dL, dR);
+        cout << (node.size - ans - 1) << ' ' << ans;
         cout << '\n';
     }
 
     return 0;
 }
+
