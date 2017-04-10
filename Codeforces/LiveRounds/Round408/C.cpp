@@ -1,68 +1,61 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
+#include <string>
+#include <utility>
 #include <map>
-#define HACKED -10000000000
+#define F first
+#define S second
+#define PB push_back
+#define MP make_pair
 typedef long long ll;
 using namespace std;
+const ll INF = ll(1e18);
 
-struct Node {
-    int pos;
-    ll val;
-} ;
-
-bool anyH(auto& v, auto& hash, int j) {
-    for (int x: hash[j])
-        if (v[x].val == HACKED)
-            return true;
-    return false;
+void del(map<ll, int> & mp, ll x) {
+    mp[x]--;
+    if (mp[x] == 0)
+        mp.erase(x);
 }
 
 int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(nullptr);
+
     int N; cin >> N;
-    vector<Node> v(N);
-    map<int, vector<int> > hash;
-    map<int, int> sum;
+    vector<ll> arr(N);
+    vector< vector<int> > conn(N);
+    map<ll, int> cnt;
 
-    for (int i = 0; i < N; ++i) {
-        int tmp; cin >> tmp;
-        v[i].val = tmp;
-        v[i].pos = i;
-        sum[i] = 0;
-    }
+    for (int i = 0; i < N; ++i)
+        cin >> arr[i], cnt[arr[i]]++;
 
-    for (int i = 0; i < N-1; ++i) {
+    for (int i = 0; i < N - 1; ++i) {
         int a, b; cin >> a >> b;
-        if (hash.count(a))
-            hash[a].push_back(b);
-        else
-            hash[a] = {b};
-
-        if (hash.count(b))
-            hash[b].push_back(a);
-        else
-            hash[b] = {a};
+        --a, --b;
+        conn[a].PB(b);
+        conn[b].PB(a);
     }
 
-    ll biggest=0;
+    ll res = INF;
     for (int i = 0; i < N; ++i) {
-        int cur = 0;
-        for (int j = 1; j < N; ++j) {
-            if (v[j].val + sum[j] > v[cur].val + sum[cur] && (i==0 || anyH(v, hash, j)))
-                cur = j;
+        ll cur = arr[i];
+        del(cnt, arr[i]);
+        for (int to: conn[i]) {
+            cur = max(cur, arr[to] + 1);
+            del(cnt, arr[to]);
         }
-
-        Node &node = v[cur];
-        biggest = max(biggest, node.val + sum[cur]);
-        node.val = HACKED;
-        for (int x: hash[cur]) {
-            ++sum[x];
-            for (int y: hash[x])
-                ++sum[y];
+        if (cnt.size()) {
+            auto it = cnt.end();
+            it--;
+            cur = max(cur, it->F + 2);
         }
+        cnt[arr[i]]++;
+        for (int neigh: conn[i])
+            cnt[arr[neigh]]++;
+        res = min(res, cur);
     }
-
-    cout << biggest << '\n';
+    cout << res << '\n';
 
     return 0;
 }

@@ -2,26 +2,21 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <set>
+#include <utility>
 #define F first
 #define S second
 #define PB push_back
 #define MP make_pair
 typedef long long ll;
 using namespace std;
+const ll INF = ll(1e18);
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(nullptr);
-    freopen("in", "r", stdin);
-    freopen("out", "w", stdout);
 
-    int T; cin >> T;
-    for (int t = 1; t <= T; ++t) {
-
-        cout << "Case #" << t << ": ";
-        cout << '\n';
-    }
+    int N; cin >> N;
+    vector<int> arr(N);
 
     return 0;
 }

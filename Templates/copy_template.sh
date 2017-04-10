@@ -1,3 +1,3 @@
 #!/bin/bash
-cp ~/CompetitiveP/Templates/cppTemplate.c++ "${PWD}/${1}"
+cp ~/CompetitiveP/Templates/cppTemplate.cpp "${PWD}/${1}"
 
