@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-    int n; cin >> n;
+    int N; cin >> N;
 
     return 0;
 }

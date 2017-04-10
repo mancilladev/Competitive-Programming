@@ -4,7 +4,7 @@ fout = open("out", 'w')
 
 T = int(fin.readline())
 for tt in range(T):
-    N = int(fin.readline())
+    N = int(fin.readline)
     ans = 0
 
     fout.write('Case #{0}: {1}'.format(tt+1, ans))
