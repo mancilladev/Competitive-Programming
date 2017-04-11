@@ -3,12 +3,12 @@
 #include <vector>
 #include <string>
 #include <utility>
+using namespace std;
 #define F first
 #define S second
 #define PB push_back
 #define MP make_pair
 typedef long long ll;
-using namespace std;
 const ll INF = ll(1e18);
 
 int main() {
@@ -17,6 +17,7 @@ int main() {
 
     int N; cin >> N;
     vector<int> arr(N);
+    for (int i = 0; i < N; ++i)
 
     return 0;
 }

@@ -3,12 +3,13 @@
 #include <vector>
 #include <string>
 #include <set>
+using namespace std;
 #define F first
 #define S second
 #define PB push_back
 #define MP make_pair
 typedef long long ll;
-using namespace std;
+const ll INF = ll(1e18);
 
 int main() {
     ios_base::sync_with_stdio(0);
