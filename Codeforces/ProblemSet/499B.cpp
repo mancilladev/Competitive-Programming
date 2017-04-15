@@ -2,8 +2,9 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <utility>
 #include <cmath>
-#include <set>
+#include <unordered_map>
 using namespace std;
 #define F first
 #define S second
@@ -15,15 +16,18 @@ const ll INF = ll(1e18);
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(nullptr);
-    freopen("in", "r", stdin);
-    freopen("out", "w", stdout);
 
-    int T; cin >> T;
-    for (int t = 1; t <= T; ++t) {
-
-        cout << "Case #" << t << ": ";
-        cout << '\n';
+    int N, M; cin >> N >> M;
+    unordered_map<string, string> table;
+    for (int i = 0; i < M; ++i) {
+        string a, b; cin >> a >> b;
+        table[a] = (a.size() > b.size()) ? b : a;
     }
+
+    string s;
+    while (cin >> s)
+        cout << table[s] << ' ';
+    cout << '\n';
 
     return 0;
 }

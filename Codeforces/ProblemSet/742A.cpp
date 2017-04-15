@@ -1,9 +1,5 @@
-#include <algorithm>
 #include <iostream>
-#include <vector>
-#include <string>
 #include <cmath>
-#include <set>
 using namespace std;
 #define F first
 #define S second
@@ -15,15 +11,13 @@ const ll INF = ll(1e18);
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(nullptr);
-    freopen("in", "r", stdin);
-    freopen("out", "w", stdout);
 
-    int T; cin >> T;
-    for (int t = 1; t <= T; ++t) {
+    int N; cin >> N;
 
-        cout << "Case #" << t << ": ";
-        cout << '\n';
-    }
+    int res;
+    res = pow(8, (N-1)%4+1);
+
+    cout << res%10 << '\n';
 
     return 0;
 }

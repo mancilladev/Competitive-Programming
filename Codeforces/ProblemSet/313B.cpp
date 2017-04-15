@@ -2,8 +2,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <utility>
 #include <cmath>
-#include <set>
 using namespace std;
 #define F first
 #define S second
@@ -15,14 +15,19 @@ const ll INF = ll(1e18);
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(nullptr);
-    freopen("in", "r", stdin);
-    freopen("out", "w", stdout);
 
-    int T; cin >> T;
-    for (int t = 1; t <= T; ++t) {
+    string S; cin >> S;
+    int N = S.size();
+    vector<ll> dp(N);
+    dp[N-1] = 0;
 
-        cout << "Case #" << t << ": ";
-        cout << '\n';
+    for (int i = N-2; i >= 0; --i)
+        dp[i] = dp[i+1] + (S[i] == S[i+1] ? 1 : 0);
+
+    int M; cin >> M;
+    while (M--) {
+        int l, r; cin >> l >> r;
+        cout << dp[l-1] - dp[r-1] << '\n';
     }
 
     return 0;

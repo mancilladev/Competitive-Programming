@@ -2,8 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <cmath>
-#include <set>
+#include <utility>
 using namespace std;
 #define F first
 #define S second
@@ -12,18 +11,20 @@ using namespace std;
 typedef long long ll;
 const ll INF = ll(1e18);
 
+ll gauss(ll x) {
+    return x * (x+1) / 2;
+}
+
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(nullptr);
-    freopen("in", "r", stdin);
-    freopen("out", "w", stdout);
 
-    int T; cin >> T;
-    for (int t = 1; t <= T; ++t) {
+    ll N, K; cin >> N >> K;
+    ll left = 4*60 - K;
+    while (5 * gauss(N) > left)
+        --N;
 
-        cout << "Case #" << t << ": ";
-        cout << '\n';
-    }
+    cout << N << '\n';
 
     return 0;
 }
