@@ -1,9 +1,4 @@
-#include <algorithm>
-#include <iostream>
-#include <vector>
-#include <string>
-#include <utility>
-#include <cmath>
+#include <bits/stdc++.h>
 using namespace std;
 #define F first
 #define S second
@@ -11,14 +6,16 @@ using namespace std;
 #define MP make_pair
 typedef long long ll;
 const ll INF = ll(1e18);
+int N;
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(nullptr);
 
-    int N; cin >> N;
+    cin >> N;
     vector<int> arr(N);
     for (int i = 0; i < N; ++i)
+        continue;
 
     return 0;
 }
