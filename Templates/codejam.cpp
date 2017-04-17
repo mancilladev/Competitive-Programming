@@ -10,6 +10,7 @@ using namespace std;
 #define PB push_back
 #define MP make_pair
 typedef long long ll;
+typedef long double ld;
 const ll INF = ll(1e18);
 
 int main() {

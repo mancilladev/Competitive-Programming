@@ -5,18 +5,27 @@ using namespace std;
 #define PB push_back
 #define MP make_pair
 typedef long long ll;
-typedef long double ld;
 const ll INF = ll(1e18);
-int N;
+string x, y;
+
+bool solves() {
+    for (int i = 0; i < x.size(); ++i) {
+        if (x[i] < y[i])
+            return false;
+    }
+    return true;
+}
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(nullptr);
 
-    cin >> N;
-    vector<int> arr(N);
-    for (int i = 0; i < N; ++i)
-        continue;
+    cin >> x >> y;
+
+    if (solves())
+        cout << y << endl;
+    else
+        cout << "-1\n";
 
     return 0;
 }
