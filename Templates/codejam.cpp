@@ -1,17 +1,10 @@
-#include <algorithm>
-#include <iostream>
-#include <vector>
-#include <string>
-#include <cmath>
-#include <set>
+#include <bits/stdc++.h>
 using namespace std;
-#define F first
-#define S second
 #define PB push_back
-#define MP make_pair
 typedef long long ll;
 typedef long double ld;
 const ll INF = ll(1e18);
+ll T, N, M;
 
 int main() {
     ios_base::sync_with_stdio(0);
@@ -19,7 +12,7 @@ int main() {
     freopen("in", "r", stdin);
     freopen("out", "w", stdout);
 
-    int T; cin >> T;
+    cin >> T;
     for (int t = 1; t <= T; ++t) {
 
         cout << "Case #" << t << ": ";
