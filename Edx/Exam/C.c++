@@ -20,6 +20,8 @@ bool mergeSort(auto& v, auto& w, int l, int r) {
 
         if (v[m-1] > v[r-1] && v[m-1] + v[r-1] > M)
             return false;
+        if (v[m-1] > v[m] && v[m-1] + v[m] > M)
+            return false;
 
         int i, j, k;
         i = l; j = m; k = l;

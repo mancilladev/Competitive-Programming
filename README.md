@@ -8,3 +8,9 @@ Made by Diego Said Anaya Mancilla, a competitive programmer with handle: [redcpp
 <img src="https://img.shields.io/badge/UVa-9-orange.svg">
 
 <img src="https://projecteuler.net/profile/redcpp.png">
+
+
+**Estimated total: 432**
+
+*Note: The estimated total takes into account solved problems, not solved but tried problems, etc.*
+
