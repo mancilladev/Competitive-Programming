@@ -10,10 +10,17 @@ int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(nullptr);
 
-    cin >> N;
-    vector<ll> arr(N);
-    for (int i = 0; i < N; ++i)
-        cin >> arr[i];
-
+    cin >> T;
+    while (T--) {
+        ll a, b;
+        cin >> a >> b;
+        if (a > b)
+            cout << '>';
+        else if (a < b)
+            cout << '<';
+        else
+            cout << '=';
+        cout << '\n';
+    }
     return 0;
 }
