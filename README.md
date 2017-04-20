@@ -5,7 +5,8 @@ Solutions for various **Competitive Programming** websites and competitions.
 By Diego Said Anaya Mancilla -> [**redcpp**](http://codeforces.com/profile/redcpp)
 
 ## Solved Problems
-[alt text][et]
+
+![alt text][et]
 ![alt text][cf]
 ![alt text][uva]
 
