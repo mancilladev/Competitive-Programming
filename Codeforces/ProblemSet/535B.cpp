@@ -4,16 +4,20 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 const ll INF = ll(1e18);
-const int MAX = (1e5);
-int N, arr[MAX] {0};
+ll T, N;
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(nullptr);
 
-    cin >> N;
-    for (int i = 0; i < N; ++i)
-        cin >> arr[i];
+    string s;
+    cin >> s;
+    ll res = pow(2, s.size()) - 1;
+    for (int i = s.size()-1; i >= 0; --i) {
+        if (s[i] == '7')
+            res += pow(2, s.size()-(i+1));
+    }
+    cout << res << '\n';
 
     return 0;
 }

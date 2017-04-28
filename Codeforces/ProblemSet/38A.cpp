@@ -4,16 +4,19 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 const ll INF = ll(1e18);
-const int MAX = (1e5);
-int N, arr[MAX] {0};
+int N, a, b, arr[101] {0};
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(nullptr);
 
     cin >> N;
-    for (int i = 0; i < N; ++i)
+    for (int i = 1; i < N; ++i) {
         cin >> arr[i];
+        arr[i] += arr[i-1];
+    }
+    cin >> a >> b;
+    cout << arr[b-1] - arr[a-1] << '\n';
 
     return 0;
 }
