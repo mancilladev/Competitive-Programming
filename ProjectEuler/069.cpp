@@ -1,26 +1,35 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
+#define PB push_back
+typedef long long ll;
+typedef long double ld;
+const ll INF = ll(1e18);
+const int MAX = (1e5);
+int N, arr[MAX] {0};
 
-int gcd(int x, int y) {
-        if (y == 0) return x;
-        return gcd(y, x%y);
+struct Node {
+    ld n;
+    ld phi;
+} res, node;
+
+int totient(int x) {
+    int cnt = 0;
+    for (int i = 1; i < x; ++i)
+        if (__gcd(x, i) == 1)
+            ++cnt;
+    return cnt;
 }
 
-int main () {
-        vector<double> antiprimes = {2, 4, 6, 12, 24, 36, 48, 60, 120, 180, 240, 360, 720, 840, 1260, 1680, 2520, 5040, 7560, 10080, 15120, 20160, 25200, 27720, 45360, 50400, 55440, 83160, 110880, 166320, 221760, 277200, 332640, 498960, 554400, 665280, 720720};
-        double m_phi = 0;
-        int ans = 0;
-        for (auto i: antiprimes) {
-                int coprimes = 0;
-                for (int j = i-1; j > 0; j--) {
-                        if (gcd(i, j) == 1) coprimes++;
-                }
-                // cout<<i<<" "<<coprimes<<" "<<i/coprimes<<endl;
-                if (i/coprimes > m_phi) {
-                        ans = i;
-                        m_phi = i/coprimes;
-                }
+int main() {
+    res = {6, 2};
+    for (int i = 6; i <= 1000000; i += res.n) {
+        ld nt = totient(i);
+        if (i/nt > res.n/res.phi) {
+            res = {(ld)i, nt};
+            cout << i << ' ' << nt << '\n';
         }
-        cout<<ans<<endl;
+    }
+    cout << res.n << endl;
+    return 0;
 }
+
