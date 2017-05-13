@@ -4,8 +4,7 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 const ll INF = ll(1e18);
-const int MAX = (1e5);
-int N, M, arr[MAX] {0};
+int N, M, arr[110000];
 vector<int> h[110000];
 
 int dfs(int parent, int child) {
@@ -31,7 +30,7 @@ int main() {
     cin >> N >> M;
     for (int i = 1; i <= N; ++i)
         cin >> arr[i];
-    for (int i = 0; i < N-1; ++i) {
+    for (int i = 1; i < N; ++i) {
         int x, y; cin >> x >> y;
         h[x].PB(y);
         h[y].PB(x);
