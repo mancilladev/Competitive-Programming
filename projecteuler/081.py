@@ -1,6 +1,5 @@
 import numpy as np
 M = np.loadtxt('file_081.txt', delimiter=',')
-print(M)
 print(len(M), len(M[0]))
 
 INF = sum(sum(M))
