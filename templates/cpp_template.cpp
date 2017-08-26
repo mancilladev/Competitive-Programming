@@ -1,11 +1,9 @@
 #include <bits/stdc++.h>
-using namespace std;
 #define PB push_back
+using namespace std;
 typedef long long ll;
-typedef long double ld;
 const ll INF = ll(1e18);
-const int MAX = (1e5);
-int N, arr[MAX] {0};
+int N, arr[N+1] {0};
 
 int main() {
     ios_base::sync_with_stdio(0);
