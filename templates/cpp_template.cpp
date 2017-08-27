@@ -1,17 +1,17 @@
 #include <bits/stdc++.h>
-#define PB push_back
 using namespace std;
+#define PB push_back
 typedef long long ll;
 const ll INF = ll(1e18);
-int N, arr[N+1] {0};
 
-int main() {
+#ifndef ONLINE_JUDGE
+    freopen("in", "r", stdin);
+#else
     ios_base::sync_with_stdio(0);
     cin.tie(nullptr);
+#endif
 
-    cin >> N;
-    for (int i = 0; i < N; ++i)
-        cin >> arr[i];
+int main(void) {
 
     return 0;
 }
