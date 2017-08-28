@@ -1,10 +1,13 @@
 #include <bits/stdc++.h>
-using namespace std;
 #define PB push_back
+using namespace std;
+typedef long long ll;
 typedef long double ld;
-const ld INF = ld(1e18);
+const ll INF = ll(1e18);
 
 int main(void) {
+    // freopen("in", "r", stdin);
+    // freopen("out", "w", stdout);
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
 
     return 0;
