@@ -6,32 +6,52 @@ typedef long double ld;
 const ll INF = ll(1e18);
 
 const int MOD = (int)1e9 + 7;
-const int N = 200000 + 7;
-ll a[N];
+const int N = 1010100;
+ll a[N], cnt[N], dp[N], power[N];
+ll ans = 0, maxi = 0;
 ll n;
-ll ans = 0;
-
-void func(int i, int k, ll val) {
-    ans += (k * val) % MOD;
-    ans %= MOD;
-    for (int j = i + 1; j < n; ++j) {
-        int t = __gcd(val, a[j]);
-        if (t > 1)
-            func(j, k + 1, t);
-    }
-}
 
 int main(void) {
     // freopen("in", "r", stdin);
     // freopen("out", "w", stdout);
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
     cin >> n;
-    for (int i = 0; i < n; ++i)
+
+    // powers
+    power[0] = 1;
+    for (ll i = 1; i < N; ++i)
+        power[i] = (power[i-1] * 2) % MOD;
+
+    // common divisors
+    for (ll i = 0; i < n; ++i) {
         cin >> a[i];
-    for (int i = 0; i < n; ++i)
-        if (a[i] != 1)
-            func(i, 1, a[i]);
+        maxi = max(maxi, a[i]);
+        for (ll j = 2; j * j <= a[i]; ++j) if (a[i]%j == 0) {
+            cnt[j]++;
+            if (a[i]/j != j)
+                cnt[a[i]/j]++;
+        }
+        cnt[a[i]]++;
+    }
+
+    // step 2
+    for (int i = maxi; i >= 2; --i) {
+        ll minus = 0;
+        if (cnt[i] > 0) {
+            if (i <= maxi/2)
+                for (ll j = i * 2; j > 0 && j <= maxi; j += i)
+                    minus += dp[i];
+            dp[i] = (cnt[i] * power[cnt[i] - 1]) % MOD;
+            dp[i] -= minus;
+            dp[i] = (dp[i]%MOD + MOD) % MOD;
+            ans = (ans + (dp[i] * i)%MOD) % MOD;
+        } else {
+            dp[i] = 0;
+        }
+    }
+
     cout << ans << endl;
 
     return 0;
 }
+
