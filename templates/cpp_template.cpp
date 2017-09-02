@@ -3,7 +3,6 @@
 using namespace std;
 typedef long long ll;
 typedef long double ld;
-const ll INF = ll(1e18);
 
 int main(void) {
     // freopen("in", "r", stdin);
