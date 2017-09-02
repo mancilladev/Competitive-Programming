@@ -14,7 +14,7 @@ int main(void) {
     int x = 0;
     for (int i = 0; i < (int) s.length(); ++i) {
         if (s[i] == t[i]) ans += s[i];
-        else ans += '0' + (x&1), ++x;
+        else ans += (x&1 ? s[i] : t[i]), ++x;
     }
     if (x&1) cout << "impossible\n";
     else cout << ans << '\n';
