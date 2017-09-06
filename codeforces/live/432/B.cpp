@@ -1,16 +1,18 @@
 #include <bits/stdc++.h>
 #define PB push_back
+#define sq(x) ((x) * (x))
 using namespace std;
 typedef long long ll;
 typedef long double ld;
 
 struct Node {
-    ld x;
-    ld y;
+    ll x;
+    ll y;
 } a, b, c;
 
-ld dist(auto p, auto q) {
-    return sqrt((p.x-q.x)*(p.x-q.x) + (p.y-q.y)*(p.y-q.y));
+ll dist(auto p, auto q) {
+    // don't use sqrt for precision
+    return sq(p.x-q.x) + sq(p.y-q.y);
 }
 
 int main(void) {
@@ -20,11 +22,12 @@ int main(void) {
     cin >> a.x >> a.y;
     cin >> b.x >> b.y;
     cin >> c.x >> c.y;
-    ld d1 = dist(a, b);
-    ld d2 = dist(b, c);
-    ld d3 = dist(c, a);
-    printf("%LF %LF %LF", d1, d2, d3);
-    if (d1 == d2 || d2 == d3)
+    ll d1 = dist(a, b);
+    ll d2 = dist(b, c);
+    // first check non collinearity
+    if ((b.y - a.y)*(c.x - b.x) == (c.y - b.y)*(b.x - a.x))
+        cout << "No\n";
+    else if (d1 == d2)
         cout << "Yes\n";
     else
         cout << "No\n";

@@ -11,7 +11,7 @@ int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
     cin >> n >> k >> t;
     if (t <= k)
-        cout << (k - (k - t)) << endl;
+        cout << t << endl;
     else if (t <= n)
         cout << k << endl;
     else
