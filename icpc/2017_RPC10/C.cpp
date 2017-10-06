@@ -2,13 +2,14 @@
 using namespace std;
 typedef long long ll;
 
-ll N, b;
+int N, b;
 int main () {
     while (cin >> N >> b) {
         string path = "";
-        ll top = pow(2, N);
-        ll lvl = log2(top - b);
-        for (ll i = lvl+1; i < N; ++i)
+        int tmp = pow(2, N) - b;
+        int lvl = 0;
+        while (tmp >>= 1) ++lvl;
+        for (int i = lvl+1; i < N; ++i)
             b -= pow(2, i);
         while (lvl--) {
             if (b&1) path += 'R';
