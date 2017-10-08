@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
-#define PB push_back
 using namespace std;
+#define error(x) cerr << #x << " is " << x << endl;
+#define mt make_tuple
+#define eb emplace_back
+#define pb push_back
 typedef long long ll;
 typedef long double ld;
 const ll INF = ll(1e18);
