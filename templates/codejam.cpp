@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define error(x) cerr << #x << " is " << x << endl;
+#define error(x) cerr << #x << " is " << x << endl
 #define mt make_tuple
 #define eb emplace_back
 #define pb push_back
