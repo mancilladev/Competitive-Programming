@@ -4,9 +4,9 @@
 
 using namespace std;
 using namespace __gnu_pbds;
- 
+
 typedef long long ll;
-template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag,tree_order_statistics_node_update>;
+template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 #define error(x) cerr << #x << " = " << x << endl
 #define sz(x) (int)(x).size()
@@ -20,8 +20,6 @@ template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag,tree_ord
 const int MOD = 1e9 + 7;
 
 int main(void) {
-    // freopen("in", "r", stdin);
-    // freopen("out", "w", stdout);
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
 
     return 0;
