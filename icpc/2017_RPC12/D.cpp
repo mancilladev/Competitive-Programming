@@ -6,14 +6,7 @@ using namespace std;
 using namespace __gnu_pbds;
 
 typedef long long ll;
-typedef pair<int,int> pii;
 template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-inline void OPEN (string s) {
-    #ifdef DLOCAL
-    freopen ((s + ".in").c_str (), "r", stdin);
-    freopen ((s + ".out").c_str (), "w", stdout);
-    #endif
-}
 
 #define error(x) cerr << #x << " = " << x << endl
 #define sz(x) (int)(x).size()
@@ -25,18 +18,20 @@ inline void OPEN (string s) {
 #define ub upper_bound
 
 const int MOD = 1e9 + 7;
-const ll INF = ll(1e18);
-ll T, N, M;
 
-int main() {
+string s;
+int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-
-    cin >> T;
-    for (int t = 1; t <= T; ++t) {
-
-        cout << "Case #" << t << ": ";
-        cout << '\n';
+    while (cin >> s) {
+        if (s == "0") break;
+        int n = 0;
+        for (auto c: s) n += c - '0';
+        while (n > 9) {
+            int nn = 0;
+            while (n) nn += n%10, n /= 10;
+            n = nn;
+        }
+        cout << n << endl;
     }
-
     return 0;
 }

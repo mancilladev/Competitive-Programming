@@ -6,6 +6,7 @@ using namespace std;
 using namespace __gnu_pbds;
 
 typedef long long ll;
+typedef pair<int,int> pii;
 template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 #define error(x) cerr << #x << " = " << x << endl
