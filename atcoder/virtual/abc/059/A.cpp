@@ -11,18 +11,22 @@ template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_or
 
 #define error(x) cerr << #x << " = " << x << endl
 #define sz(x) (int)(x).size()
-#define sq(x) (x) * (x)
 #define eb emplace_back
 #define pb push_back
 #define f first
 #define s second
-#define endl '\n'
+#define lb lower_bound
+#define ub upper_bound
 
 const int INF = 1e9 + 7;
-int N;
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-
+    string s;
+    for (int i = 0; i < 3; ++i) {
+       string a; cin >> a;
+       s += toupper(a[0]);
+    }
+    cout << s << '\n';
     return 0;
 }
