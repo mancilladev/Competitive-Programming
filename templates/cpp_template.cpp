@@ -23,6 +23,11 @@ int n;
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
+    cin >> n;
+    vector<int> a(n);
+    for (auto& x : a) {
+        cin >> x;
+    }
 
     return 0;
 }

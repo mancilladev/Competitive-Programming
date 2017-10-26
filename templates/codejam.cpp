@@ -32,6 +32,7 @@ int main() {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
     cin >> T;
     for (int t = 1; t <= T; ++t) {
+        cin >> N >> M;
 
         cout << "Case #" << t << ": ";
         cout << '\n';
