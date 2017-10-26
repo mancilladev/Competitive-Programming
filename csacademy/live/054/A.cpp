@@ -19,10 +19,16 @@ template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_or
 #define endl '\n'
 
 const int INF = 1e9 + 7;
-int n;
+int N, K;
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-
+    cin >> N >> K;
+    vector<int> arr(N);
+    for (int i = 0; i < N; ++i) cin >> arr[i];
+    sort(arr.begin(), arr.end());
+    ll sum = 0;
+    for (int i = 0; i < K; ++i) sum += arr[i];
+    cout << (sum/100 + (sum%100 > 0)) << endl;
     return 0;
 }

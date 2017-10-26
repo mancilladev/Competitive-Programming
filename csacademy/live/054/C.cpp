@@ -19,10 +19,30 @@ template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_or
 #define endl '\n'
 
 const int INF = 1e9 + 7;
-int n;
+int n, k;
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-
+    cin >> n >> k;
+    vector<int> a(n);
+    for (auto& it : a) cin >> it;
+    multiset<int> s;
+    for (int i = 0; i < k && i < n; ++i) s.insert(a[i]);
+    for (int i = 0; i < n; ++i) {
+        if (i + k < n) s.insert(a[i+k]);
+        int x = *(s.begin());
+        if (x < a[i]) {
+            for (int j = i + k; j >= i + 1; --j) {
+                if (j < n && a[j] == x) {
+                    swap(a[i], a[j]);
+                    break;
+                }
+            }
+            break;
+        }
+        s.erase(s.find(a[i]));
+    }
+    for (auto it : a) cout << it << ' ';
+    cout << endl;
     return 0;
 }
