@@ -23,11 +23,18 @@ int n;
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
+#ifdef LOCAL
+    //freopen("input.txt", "r", stdin);
+#endif
+
     cin >> n;
     vector<int> a(n);
     for (auto& x : a) {
         cin >> x;
     }
 
+#ifdef LOCAL
+    cout << endl << endl << static_cast<double>(clock()) / CLOCKS_PER_SEC << endl;
+#endif
     return 0;
 }

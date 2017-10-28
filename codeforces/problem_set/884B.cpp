@@ -8,12 +8,6 @@ using namespace __gnu_pbds;
 typedef long long ll;
 typedef pair<int,int> pii;
 template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-inline void OPEN (string s) {
-    #ifdef LOCAL
-    freopen((s + ".in").c_str(), "r", stdin);
-    freopen((s + ".out").c_str(), "w", stdout);
-    #endif
-}
 
 #define error(x) cerr << #x << " = " << x << endl
 #define sz(x) (int)(x).size()
@@ -24,24 +18,18 @@ inline void OPEN (string s) {
 #define s second
 #define endl '\n'
 
-const int MOD = 1e9 + 7;
-const ll INF = ll(1e18);
-ll T, N, M;
+const int INF = 1e9 + 7;
+ll n, x;
 
-int main() {
+int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    OPEN("A");
-
-    cin >> T;
-    for (int t = 1; t <= T; ++t) {
-        cin >> N >> M;
-
-        cout << "Case #" << t << ": ";
-        cout << '\n';
+    cin >> n >> x;
+    vector<int> a(n);
+    for (auto& x : a) {
+        cin >> x;
     }
-
-#ifdef LOCAL
-    cout << endl << endl << static_cast<double>(clock()) / CLOCKS_PER_SEC << endl;
-#endif
+    ll sum = accumulate(a.begin(), a.end(), (ll)0);
+    if (sum + n - 1 == x) cout << "YES" << endl;
+    else cout << "NO" << endl;
     return 0;
 }

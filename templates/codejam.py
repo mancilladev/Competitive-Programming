@@ -1,10 +1,11 @@
 import sys
-fin = open('in', 'r')
-fout = open("out", 'w')
+filename = 'A'
+fin = open(f'{filename}.in', 'r')
+fout = open(f'{filename}.out', 'w')
 
 T = int(fin.readline())
 for tt in range(T):
     N = int(fin.readline())
-    ans = 0
+    res = 0
 
-    fout.write('Case #{0}: {1}'.format(tt+1, ans))
+    fout.write(f'Case #{tt+1}: {res}')

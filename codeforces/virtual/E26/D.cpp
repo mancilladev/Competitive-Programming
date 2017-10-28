@@ -8,12 +8,6 @@ using namespace __gnu_pbds;
 typedef long long ll;
 typedef pair<int,int> pii;
 template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-inline void OPEN (string s) {
-    #ifdef LOCAL
-    freopen((s + ".in").c_str(), "r", stdin);
-    freopen((s + ".out").c_str(), "w", stdout);
-    #endif
-}
 
 #define error(x) cerr << #x << " = " << x << endl
 #define sz(x) (int)(x).size()
@@ -24,24 +18,24 @@ inline void OPEN (string s) {
 #define s second
 #define endl '\n'
 
-const int MOD = 1e9 + 7;
-const ll INF = ll(1e18);
-ll T, N, M;
+const int INF = 1e9 + 7;
+int n, k;
 
-int main() {
+pii roundness(ll x) {
+    int a = 0, b = 0;
+    while (x%2 == 0) x /= 2, ++a;
+    while (x%5 == 0) x /= 5, ++b;
+    pii p {a, b};
+    return p;
+}
+
+int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    OPEN("A");
-
-    cin >> T;
-    for (int t = 1; t <= T; ++t) {
-        cin >> N >> M;
-
-        cout << "Case #" << t << ": ";
-        cout << '\n';
+    cin >> n >> k;
+    vector<pii> arr;
+    for (int i = 0; i < n; ++i) {
+        ll x; cin >> x;
+        arr.pb(roundness(x));
     }
-
-#ifdef LOCAL
-    cout << endl << endl << static_cast<double>(clock()) / CLOCKS_PER_SEC << endl;
-#endif
     return 0;
 }
