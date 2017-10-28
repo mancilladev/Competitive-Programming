@@ -6,17 +6,22 @@ using namespace std;
 using namespace __gnu_pbds;
 
 typedef long long ll;
+typedef long double ld;
 typedef pair<int,int> pii;
+template <class T> using min_queue = priority_queue<T, vector<T>, greater<T>>;
 template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 inline void OPEN (string s) {
-    #ifdef LOCAL
     freopen((s + ".in").c_str(), "r", stdin);
     freopen((s + ".out").c_str(), "w", stdout);
-    #endif
 }
 
+const int INF = static_cast<int>(1e9);
+const long long LLINF = static_cast<long long>(4e18);
+const double pi = acos(-1.0);
+
 #define error(x) cerr << #x << " = " << x << endl
-#define sz(x) (int)(x).size()
+#define sz(a) static_cast<int>((a).size())
+#define all(a) (a).begin(), (a).end()
 #define sq(x) (x) * (x)
 #define eb emplace_back
 #define pb push_back
@@ -24,8 +29,11 @@ inline void OPEN (string s) {
 #define s second
 #define endl '\n'
 
-const int MOD = 1e9 + 7;
-const ll INF = ll(1e18);
+#define UNIQUE(a) sort(all(a)), (a).erase(unique(all(a)), (a).end())
+#define FOR(i, a, b) for (int i(a), b_(b); i < b_; ++i)
+#define REP(i, n) FOR (i, 0, n)
+#define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
+
 ll T, N, M;
 
 int main() {
@@ -33,7 +41,7 @@ int main() {
     OPEN("A");
 
     cin >> T;
-    for (int t = 1; t <= T; ++t) {
+    FOR (t, 1, T+1) {
         cin >> N >> M;
 
         cout << "Case #" << t << ": ";
