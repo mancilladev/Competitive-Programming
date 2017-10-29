@@ -30,21 +30,14 @@ const double pi = acos(-1.0);
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
-ll a;
-
-int lucky(ll x) {
-    while (x) {
-        if (x%10 == 8) return 1;
-        x /= 10;
-    }
-    return 0;
-}
+int n, w, needs;
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> a;
-    ll b = a+1;
-    while (!lucky(llabs(b))) ++b;
-    cout << b - a << endl;
+    cin >> n >> w >> needs;
+    int dummy = 0;
+    while ((w + dummy) * 100 / n < needs)
+        ++dummy;
+    cout << dummy << endl;;
     return 0;
 }
