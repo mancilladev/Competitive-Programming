@@ -30,14 +30,19 @@ const double pi = acos(-1.0);
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
-int n;
+int k, l;
+ll a, b;
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> n;
-    vector<int> a(n);
-    for (auto& x : a) {
-        cin >> x;
+    cin >> k >> l;
+    a = k; b = l;
+    while (a < b) a *= k;
+    if (a == b) {
+        cout << "YES\n";
+        cout << (log(a)/log(k)) - 1 << endl;
+    } else {
+        cout << "NO\n";
     }
     return 0;
 }

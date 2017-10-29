@@ -30,14 +30,36 @@ const double pi = acos(-1.0);
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
-int n;
+int n, x;
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
     cin >> n;
-    vector<int> a(n);
-    for (auto& x : a) {
+    vector<int> pos, neg, zero;
+    REP(i, n) {
         cin >> x;
+        if (x < 0) neg.pb(x);
+        else if (x > 0) pos.pb(x);
+        else zero.pb(x);
     }
+    if (sz(pos) == 0) {
+        pos.pb(neg.back()); neg.pop_back();
+        pos.pb(neg.back()); neg.pop_back();
+    }
+    if ((sz(neg)&1) == 0) {
+        zero.pb(neg.back()); neg.pop_back();
+    }
+
+    cout << sz(neg) << ' ';
+    for (auto x : neg) cout << x << ' ';
+    cout << endl;
+
+    cout << sz(pos) << ' ';
+    for (auto x : pos) cout << x << ' ';
+    cout << endl;
+
+    cout << sz(zero) << ' ';
+    for (auto x : zero) cout << x << ' ';
+    cout << endl;
     return 0;
 }

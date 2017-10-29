@@ -30,14 +30,16 @@ const double pi = acos(-1.0);
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
-int n;
+int n, chips;
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> n;
-    vector<int> a(n);
-    for (auto& x : a) {
-        cin >> x;
+    cin >> n >> chips;
+    int cur = 0;
+    while (chips >= cur + 1) {
+        chips -= cur + 1;
+        cur = (cur + 1)%n;
     }
+    cout << chips << endl;
     return 0;
 }
