@@ -21,7 +21,6 @@ const double pi = acos(-1.0);
 #define sq(x) (x) * (x)
 #define eb emplace_back
 #define pb push_back
-#define mp make_pair
 #define f first
 #define s second
 #define endl '\n'
@@ -31,15 +30,23 @@ const double pi = acos(-1.0);
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
-int n;
-ll res;
+string represent(int d) {
+    string s;
+    if (d > 4) s = "-O|", d -= 5;
+    else s = "O-|";
+
+    REP(i, d) s += 'O';
+    s += '-';
+    REP(i, 4-d) s += 'O';
+    return s;
+}
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> n;
-    vector<int> a(n);
-    REP(i, n) {
-        cin >> a[i];
-    }
+    string si; cin >> si;
+    vector<string> res;
+    for (auto c : si) res.pb(represent(c - '0'));
+    reverse(all(res));
+    for (auto s : res) cout << s << endl;
     return 0;
 }

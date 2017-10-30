@@ -21,7 +21,6 @@ const double pi = acos(-1.0);
 #define sq(x) (x) * (x)
 #define eb emplace_back
 #define pb push_back
-#define mp make_pair
 #define f first
 #define s second
 #define endl '\n'
@@ -31,15 +30,34 @@ const double pi = acos(-1.0);
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
-int n;
+const int N = 2e5;
+int n, m, a, b, c[N], used[N];
 ll res;
+vector<int> g[N];
+vector<pii> v;
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> n;
-    vector<int> a(n);
+    cin >> n >> m;
     REP(i, n) {
-        cin >> a[i];
+        cin >> c[i+1];
+        v.eb(c[i+1], i+1);
     }
+    sort(all(v), greater<pii>());
+    REP(i, m) {
+        cin >> a >> b;
+        g[a].pb(b);
+        g[b].pb(a);
+    }
+    REP(i, n) {
+        int q = v[i].s;
+        REP(j, sz(g[q])) {
+            int t = g[q][j];
+            if (used[t]) continue;
+            res += c[t];
+        }
+        used[q] = 1;
+    }
+    cout << res << endl;
     return 0;
 }

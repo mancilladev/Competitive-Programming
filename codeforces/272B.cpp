@@ -34,12 +34,21 @@ const double pi = acos(-1.0);
 int n;
 ll res;
 
+int f(int x) {
+    return __builtin_popcount(x);
+}
+
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
     cin >> n;
-    vector<int> a(n);
+    vector<ll> cnt(111, 0);
     REP(i, n) {
-        cin >> a[i];
+        int x; cin >> x;
+        cnt[f(x)]++;
     }
+    REP(i, sz(cnt)) {
+        res += cnt[i] * (cnt[i]-1) / 2;
+    }
+    cout << res << endl;
     return 0;
 }

@@ -31,15 +31,18 @@ const double pi = acos(-1.0);
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
-int n;
+int n, r1, r2, d1, d2, c1, c2;
 ll res;
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> n;
-    vector<int> a(n);
-    REP(i, n) {
-        cin >> a[i];
+    cin >> r1 >> r2 >> c1 >> c2 >> d1 >> d2;
+    REP(a, 10) REP(b, 10) REP(c, 10) REP(d, 10) {
+        if (a == b || b == c || c == d || a == c || a == d || b == d || a*b*c*d == 0) continue;
+        if (a+b == r1 && a+c == c1 && b+d == c2 && c+d == r2 && a+d == d1 && c+b == d2) {
+            return cout << a << ' ' << b << '\n' << c << ' ' << d << endl, 0;
+        }
     }
+    cout << -1 << endl;
     return 0;
 }

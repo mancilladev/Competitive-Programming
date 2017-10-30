@@ -32,14 +32,28 @@ const double pi = acos(-1.0);
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
 int n;
-ll res;
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
     cin >> n;
-    vector<int> a(n);
+    vector<int> arr(n);
     REP(i, n) {
-        cin >> a[i];
+        cin >> arr[i];
     }
+    REP(i, n-1) {
+        REP(j, n-1) {
+            if (i == j) continue;
+            int a = arr[i];
+            int b = arr[i+1];
+            int c = arr[j];
+            int d = arr[j+1];
+            if (b < a) swap(a, b);
+            if (d < c) swap(c, d);
+
+            int ok = a < c && c < b && b < d;
+            if (ok) return cout << "yes\n", 0;
+        }
+    }
+    cout << "no\n";
     return 0;
 }
