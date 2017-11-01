@@ -31,16 +31,23 @@ const double pi = acos(-1.0);
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
-const int N = 1e5+7;
-int n;
+const int N = 1e6+1;
+int a, b, c;
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> n;
-    vector<int> a(n);
-    REP(i, n) {
-        cin >> a[i];
+    cin >> a >> b >> c;
+    int sum = a+b+c;
+    if (sum&1) return cout << "Impossible" << endl, 0;
+    REP(x, N) {
+        int z = a - x;
+        int y = b - x;
+        if (z < 0 || y < 0) continue;
+        if (x+z == a && x+y == b && y+z == c) {
+            cout << x << ' ' << y << ' ' << z << endl;
+            return 0;
+        }
     }
-
+    cout << "Impossible" << endl;
     return 0;
 }

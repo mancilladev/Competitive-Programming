@@ -11,8 +11,8 @@ typedef pair<int,int> pii;
 template <class T> using min_queue = priority_queue<T, vector<T>, greater<T>>;
 template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-const int INF = (int)1e9 + 7;
-const long long LLINF = (ll)4e18 + 7;
+const int INF = static_cast<int>(1e9);
+const long long LLINF = static_cast<long long>(4e18);
 const double pi = acos(-1.0);
 
 #define error(x) cerr << #x << " = " << x << endl
@@ -32,15 +32,27 @@ const double pi = acos(-1.0);
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
 const int N = 1e5+7;
-int n;
+int h, m;
+
+void _plus() {
+    m = (m + 1)%60;
+    if (m == 0) h = (h + 1)%24;
+}
+
+int palindromic(vector<int> a, vector<int> b) {
+    REP(i, 2) if (a[i] != b[1-i]) return 0;
+    return 1;
+}
+
+vector<int> digits(int x) {
+    return {x/10, x%10};
+}
 
 int main(void) {
-    ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> n;
-    vector<int> a(n);
-    REP(i, n) {
-        cin >> a[i];
-    }
-
+    scanf("%d:%d", &h, &m);
+    _plus();
+    while (!palindromic(digits(h), digits(m))) _plus();
+    cout << setfill('0') << setw(2) << h << ':';
+    cout << setfill('0') << setw(2) << m << endl;
     return 0;
 }

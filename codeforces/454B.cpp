@@ -41,6 +41,11 @@ int main(void) {
     REP(i, n) {
         cin >> a[i];
     }
-
+    int p = 0;
+    REP(i, n-1) if (a[i] > a[i+1]) p = i+1;
+    REP(i, n-1) if (a[(i+p)%n] > a[(i+p+1)%n]) {
+        return cout << -1 << endl, 0;
+    }
+    cout << (n - p)%n << endl;
     return 0;
 }

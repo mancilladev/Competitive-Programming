@@ -11,8 +11,8 @@ typedef pair<int,int> pii;
 template <class T> using min_queue = priority_queue<T, vector<T>, greater<T>>;
 template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-const int INF = (int)1e9 + 7;
-const long long LLINF = (ll)4e18 + 7;
+const int INF = static_cast<int>(2e9);
+const long long LLINF = static_cast<long long>(4e18);
 const double pi = acos(-1.0);
 
 #define error(x) cerr << #x << " = " << x << endl
@@ -37,10 +37,22 @@ int n;
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
     cin >> n;
-    vector<int> a(n);
+    int l = -INF, r = INF;
     REP(i, n) {
-        cin >> a[i];
+        string q, response; int x;
+        cin >> q >> x >> response;
+        if (response == "N") {
+            if (q == ">=") q = "<";
+            else if (q == ">") q = "<=";
+            else if (q == "<=") q = ">";
+            else if (q == "<") q = ">=";
+        }
+        if (q == ">=") l = max(x, l);
+        else if (q == ">") l = max(x+1, l);
+        else if (q == "<=") r = min(x, r);
+        else if (q == "<") r = min(x-1, r);
     }
-
+    if (l > r) cout << "Impossible\n";
+    else cout << l << endl;
     return 0;
 }

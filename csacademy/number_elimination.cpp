@@ -12,7 +12,7 @@ template <class T> using min_queue = priority_queue<T, vector<T>, greater<T>>;
 template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 const int INF = (int)1e9 + 7;
-const long long LLINF = (ll)4e18 + 7;
+const long long LLINF = static_cast<long long>(4e18);
 const double pi = acos(-1.0);
 
 #define error(x) cerr << #x << " = " << x << endl
@@ -31,8 +31,10 @@ const double pi = acos(-1.0);
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
-const int N = 1e5+7;
+const int N = 1e5+7, MOD = INF;
 int n;
+ll res;
+map<int,int> cnt;
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
@@ -41,6 +43,8 @@ int main(void) {
     REP(i, n) {
         cin >> a[i];
     }
-
+    sort(all(a));
+    REP(i, n-1) cnt[a[i+1]]++;
+    cout << cnt.begin()->s << endl;
     return 0;
 }
