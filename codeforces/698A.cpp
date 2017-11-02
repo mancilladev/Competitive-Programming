@@ -15,7 +15,7 @@ const int INF = (int)1e9 + 7;
 const long long LLINF = (ll)4e18 + 7;
 const double pi = acos(-1.0);
 
-#define deb(x) cerr << #x << " = " << x << endl
+#define error(x) cerr << #x << " = " << x << endl
 #define sz(a) static_cast<int>((a).size())
 #define all(a) (a).begin(), (a).end()
 #define sq(x) (x) * (x)
@@ -31,16 +31,38 @@ const double pi = acos(-1.0);
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
-const int N = 1e5+7;
-int n;
+const int N = 107;
+int n, a[N], cache[N][3];
+
+// 0-rest, 1-contest, 2-gym
+int dp(int day, int last) {
+    // base
+    if (day == n) return 0;
+
+    // save the day
+    if (cache[day][last] != -1)
+        return cache[day][last];
+
+    // lazy day
+    int res = 1 + dp(day+1, 0);
+    // contest day
+    if (last != 1 && (a[day] == 2 || a[day] == 3)) {
+        res = min(res, dp(day+1, 1));
+    }
+    // gym day
+    if (last != 2 && (a[day] == 1 || a[day] == 3)) {
+        res = min(res, dp(day+1, 2));
+    }
+    return cache[day][last] = res;
+}
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
     cin >> n;
-    vector<int> a(n);
     REP(i, n) {
         cin >> a[i];
     }
-
+    memset(cache, -1, sizeof cache);
+    cout << dp(0, 0) << endl;
     return 0;
 }

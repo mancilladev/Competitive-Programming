@@ -15,7 +15,7 @@ const int INF = (int)1e9 + 7;
 const long long LLINF = (ll)4e18 + 7;
 const double pi = acos(-1.0);
 
-#define deb(x) cerr << #x << " = " << x << endl
+#define error(x) cerr << #x << " = " << x << endl
 #define sz(a) static_cast<int>((a).size())
 #define all(a) (a).begin(), (a).end()
 #define sq(x) (x) * (x)
@@ -32,15 +32,25 @@ const double pi = acos(-1.0);
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
 const int N = 1e5+7;
-int n;
+int n, m, used[N];
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> n;
-    vector<int> a(n);
-    REP(i, n) {
-        cin >> a[i];
+    cin >> n >> m;
+    REP(i, m) {
+        int a, b; cin >> a >> b;
+        used[a] = 1;
+        used[b] = 1;
     }
-
+    cout << n-1 << endl;
+    int p = 0;
+    REP(i, n) if (!used[i+1]) {
+        p = i+1;
+        break;
+    }
+    REP(i, n) {
+        if (i+1 == p) continue;
+        cout << i+1 << ' ' << p << endl;
+    }
     return 0;
 }

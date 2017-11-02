@@ -19,7 +19,7 @@ const int INF = static_cast<int>(1e9);
 const long long LLINF = static_cast<long long>(4e18);
 const double pi = acos(-1.0);
 
-#define error(x) cerr << #x << " = " << x << endl
+#define deb(x) cerr << #x << " = " << x << endl
 #define sz(a) static_cast<int>((a).size())
 #define all(a) (a).begin(), (a).end()
 #define sq(x) (x) * (x)
@@ -41,15 +41,15 @@ int main() {
     OPEN("A");
 
     cin >> T;
-    FOR (t, 1, T+1) {
+    FOR (tt, 1, T+1) {
         cin >> N >> M;
 
-        cout << "Case #" << t << ": ";
+        cout << "Case #" << tt << ": ";
         cout << '\n';
     }
 
 #ifdef LOCAL
-    cout << endl << endl << static_cast<double>(clock()) / CLOCKS_PER_SEC << endl;
+    cout << "\n\n" << static_cast<double>(clock()) / CLOCKS_PER_SEC << endl;
 #endif
     return 0;
 }

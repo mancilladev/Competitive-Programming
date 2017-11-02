@@ -15,7 +15,7 @@ const int INF = (int)1e9 + 7;
 const long long LLINF = (ll)4e18 + 7;
 const double pi = acos(-1.0);
 
-#define deb(x) cerr << #x << " = " << x << endl
+#define error(x) cerr << #x << " = " << x << endl
 #define sz(a) static_cast<int>((a).size())
 #define all(a) (a).begin(), (a).end()
 #define sq(x) (x) * (x)
@@ -41,6 +41,15 @@ int main(void) {
     REP(i, n) {
         cin >> a[i];
     }
-
+    REP(i, n) {
+        if (i&1) continue;
+        if (i > n-i-1) break;
+        swap(a[i], a[n-i-1]);
+    }
+    REP(i, n) {
+        if (i) cout << ' ';
+        cout << a[i];
+    }
+    cout << endl;
     return 0;
 }

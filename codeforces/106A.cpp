@@ -15,7 +15,7 @@ const int INF = (int)1e9 + 7;
 const long long LLINF = (ll)4e18 + 7;
 const double pi = acos(-1.0);
 
-#define deb(x) cerr << #x << " = " << x << endl
+#define error(x) cerr << #x << " = " << x << endl
 #define sz(a) static_cast<int>((a).size())
 #define all(a) (a).begin(), (a).end()
 #define sq(x) (x) * (x)
@@ -32,15 +32,25 @@ const double pi = acos(-1.0);
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
 const int N = 1e5+7;
-int n;
+unordered_map<char, int> val {
+    {'6', 0},
+    {'7', 1},
+    {'8', 2},
+    {'9', 3},
+    {'T', 4},
+    {'J', 5},
+    {'Q', 6},
+    {'K', 7},
+    {'A', 8}
+};
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> n;
-    vector<int> a(n);
-    REP(i, n) {
-        cin >> a[i];
-    }
-
+    char comodin;
+    string a, b;
+    cin >> comodin >> a >> b;
+    if ((a[1] != b[1] && a[1] == comodin)
+        || (a[1] == b[1] && val[a[0]] > val[b[0]])) cout << "YES\n";
+    else cout << "NO\n";
     return 0;
 }
