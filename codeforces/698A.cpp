@@ -31,7 +31,7 @@ const double pi = acos(-1.0);
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
-const int N = 107;
+const int N = 10007;
 int n, a[N], cache[N][3];
 
 // 0-rest, 1-contest, 2-gym
