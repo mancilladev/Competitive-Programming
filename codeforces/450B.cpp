@@ -32,21 +32,24 @@ const double pi = acos(-1.0);
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
 const int N = 1e5+7;
-int n, m;
-deque<int> q;
+ll x, y, n, nxt;
+
+ll MOD(ll n) {
+    ll r = n%INF;
+    return (r < 0 ? r+INF : r);
+}
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> n >> m;
-    REP(i, n) {
-        int x; cin >> x;
-        q.pb(x);
+    cin >> x >> y >> n;
+    if (n < 3) return cout << (n == 2 ? MOD(y) : MOD(x)) << endl, 0;
+    vector<int> sol;
+    FOR(i, 3, 9) {
+        nxt = MOD(y - x);
+        x = y;
+        y = nxt;
+        sol.pb(y);
     }
-    while (sz(q) != 1) {
-        int primero = q.front(); q.pop_front();
-        primero -= m;
-        if (primero > 0) q.pb(primero);
-    }
-    cout << q.front() << endl;
+    cout << sol[(n-3)%sz(sol)] << endl;
     return 0;
 }
