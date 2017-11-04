@@ -74,109 +74,34 @@ const double pi = acos(-1.0);
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
-struct Face {
-    deque<int> left;
-    deque<int> right;
-    void rotate(int x) {
-        if (x == 0) REP(i, 2) {
-            left.pb(left.front());
-            left.pop_front();
-        } else REP(i, 2) {
-            right.pb(right.front());
-            right.pop_front();
-        }
-    }
-    int equal() {
-        for (int i = 0; i < sz(left); i+=2) {
-            if (left[i] != right[i] ||
-                left[i] != left[i+1] ||
-                right[i] != right[i+1]) {
-                return 0;
-            }
-        }
-        return 1;
-    }
-} ver, hor;
-
-void print() {
-    cerr << "V\n";
-    cerr << ver.left << endl;
-    cerr << ver.right << endl;
-    cerr << "H\n";
-    cerr << hor.left << endl;
-    cerr << hor.right << endl;
-    cerr << endl;
-    cerr << "--------------------\n\n";
-}
-
 const int N = 1e5+7;
-int n = 24;
+vector<int> arr(25);
+vector<vector<int>> posi = {
+    {1,3,5,7,9,11,24,22},
+    {2,4,6,8,10,12,23,21},
+    {13,14,5,6,17,18,21,22},
+    {15,16,7,8,19,20,23,24},
+    {9,10,19,17,4,3,14,16},
+    {11,12,20,18,2,1,13,15}
+};
 
-void changeHor() {
-    // front
-    hor.left[2] = ver.left[2];
-    hor.left[3] = ver.right[2];
-    hor.right[2] = ver.left[3];
-    hor.right[3] = ver.right[3];
-    // back
-    hor.left[6] = ver.left[6];
-    hor.left[7] = ver.right[6];
-    hor.right[6] = ver.left[7];
-    hor.right[7] = ver.right[7];
-}
-
-void changeVer() {
-    // front
-    ver.left[2] = hor.left[2];
-    ver.right[2] = hor.left[3];
-    ver.left[3] = hor.right[2];
-    ver.right[3] = hor.right[3];
-    // back
-    ver.left[6] = hor.left[6];
-    ver.right[6] = hor.left[7];
-    ver.left[7] = hor.right[6];
-    ver.right[7] = hor.right[7];
-}
-
-int check() {
-    REP(x, 2) REP(i, 4) {
-        hor.rotate(x);
-        changeVer();
-        if (ver.equal() && hor.equal()) return 1;
+bool check(vector<int> A) {
+    FOR(i, 1, 7) {
+        FOR(j, 4*i-3, 4*i) if (A[j] != A[4*i]) return 0;
     }
-    REP(x, 2) REP(i, 4) {
-        ver.rotate(x);
-        changeHor();
-        if (ver.equal() && hor.equal()) return 1;
-    }
-    return 0;
+    return 1;
 }
-
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    int vi = 0, vh = 0;
-    REP(i, 6) {
-        int a, b, c, d;
-        cin >> a >> b >> c >> d;
-        if (i < 3 || i == 5) {
-            if (i == 5) swap(a, b), swap(c, d);
-            ver.left.pb(a);
-            ver.right.pb(b);
-            ver.left.pb(c);
-            ver.right.pb(d);
-            vi++;
-        }
-        if (i == 1 || i > 2) {
-            hor.left.pb(a);
-            hor.left.pb(b);
-            hor.right.pb(c);
-            hor.right.pb(d);
-            if (i == 3) hor.rotate(0), hor.rotate(1);
-            vh++;
-        }
+    FOR(i, 1, 25) cin >> arr[i];
+    for (auto v : posi) {
+        vector<int> A = arr;
+        REP(i, sz(v)) A[v[i]] = arr[v[(i+2)%8]];
+        if (check(A)) return cout << "YES\n", 0;
+        REP(i, sz(v)) A[v[i]] = arr[v[(i+6)%8]];
+        if (check(A)) return cout << "YES\n", 0;
     }
-    if (check()) cout << "YES\n";
-    else cout << "NO\n";
+    cout << "NO\n";
     return 0;
 }
