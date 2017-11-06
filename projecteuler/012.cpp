@@ -1,5 +1,6 @@
 #include <iostream>
-#include "funcspe.cpp"
+
+long gaussSum(int n) { return (n * (n + 1)) / 2; }
 
 int main(void)
 {

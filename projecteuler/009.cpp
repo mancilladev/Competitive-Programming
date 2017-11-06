@@ -1,5 +1,8 @@
 #include <iostream>
-#include "funcspe.cpp"
+
+bool arePythagoreanTriplete(int a, int b, int c) {
+    return a*a + b*b == c*c;
+}
 
 int main(void)
 {

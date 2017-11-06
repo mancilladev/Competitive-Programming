@@ -1,5 +1,18 @@
 #include <iostream>
-#include "funcspe.cpp"
+
+int SumOfDivisors(int n)
+{
+    // Proper divisors includes 1 and the number itself
+    int sum = 1;
+    for (int i = 2; i * i <= n; ++i) {
+        if (n%i == 0) {
+            // i.e. if 28/2 != 2, also count 14
+            sum += i;
+            if (n/i != i) sum += (n/i);
+        }
+    }
+    return sum;
+}
 
 int main(void)
 {

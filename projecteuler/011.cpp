@@ -1,6 +1,5 @@
 #include <iostream>
-/*#include "funcspe.cpp"
-*/
+
 int main(void)
 {
     int grid[20][20] = {

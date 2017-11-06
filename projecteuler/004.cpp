@@ -1,5 +1,20 @@
 #include <iostream>
-#include "funcspe.cpp"
+#include <cmath>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <vector>
+
+bool isPalindrome(int num)
+{
+    // check if a number is a palindrome
+    std::stringstream ss;
+    ss << num;
+    std::string str = ss.str();
+    std::string strCopy = ss.str();
+    std::reverse(strCopy.begin(), strCopy.end());
+    return str == strCopy;
+}
 
 int main(void)
 {
@@ -11,7 +26,7 @@ int main(void)
             temp = j*i;
             if (isPalindrome(temp) && temp > largestPalindrome) {
                 largestPalindrome = temp;
-            } 
+            }
         }
     }
 

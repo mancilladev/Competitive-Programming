@@ -3,7 +3,6 @@
 #include <string>
 #include <iomanip>
 #include <fstream>
-#include "funcspe.cpp"
 
 #define MAX 15
 
@@ -15,7 +14,7 @@ int main(void)
 
     std::fstream file("file_018.txt");
     std::string str;
-    
+
     std::getline(file, str);
     std::istringstream iss(str);
 
@@ -35,7 +34,7 @@ int main(void)
         for (int j = 0; j <= i; ++j) {
             if (j == 0) triangle[i][j] += triangle[i-1][j];
             else if (j == i) triangle[i][j] += triangle[i-1][j-1];
-            else triangle[i][j] += Max(triangle[i-1][j],triangle[i-1][j-1]);
+            else triangle[i][j] += std::max(triangle[i-1][j],triangle[i-1][j-1]);
             std::cout << triangle[i][j] << " ";
         }
         std::cout << std::endl;

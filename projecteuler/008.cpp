@@ -1,5 +1,4 @@
 #include <iostream>
-#include "funcspe.cpp"
 
 int main(void)
 {

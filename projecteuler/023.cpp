@@ -1,7 +1,21 @@
 #include <iostream>
-#include "funcspe.cpp"
+#include <vector>
 
 #define MAX 28123
+
+int SumOfDivisors(int n)
+{
+    // Proper divisors includes 1 and the number itself
+    int sum = 1;
+    for (int i = 2; i * i <= n; ++i) {
+        if (n%i == 0) {
+            // i.e. if 28/2 != 2, also count 14
+            sum += i;
+            if (n/i != i) sum += (n/i);
+        }
+    }
+    return sum;
+}
 
 int main(void)
 {
@@ -19,8 +33,8 @@ int main(void)
     std::cout << std::endl;
 
     // Anotate numbers that are made out of the sum of abundant nums
-    for (int i = 0; i < abundant_nums.size(); ++i) {
-        for (int j = i; j < abundant_nums.size(); ++j) {
+    for (int i = 0; i < (int)abundant_nums.size(); ++i) {
+        for (int j = i; j < (int)abundant_nums.size(); ++j) {
             if (abundant_nums[i] + abundant_nums[j] <= MAX) {
                 has_abundant_part[abundant_nums[i] + abundant_nums[j]] = true;
             } else {

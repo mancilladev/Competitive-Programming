@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include "funcspe.cpp"
 
 int main(void)
 {
