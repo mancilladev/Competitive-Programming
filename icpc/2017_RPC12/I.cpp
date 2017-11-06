@@ -6,53 +6,100 @@ using namespace std;
 using namespace __gnu_pbds;
 
 typedef long long ll;
-typedef pair<int,int> pii;
+typedef long double ld;
+typedef pair<ld,ld> pii;
+template <class T> using min_queue = priority_queue<T, vector<T>, greater<T>>;
 template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-#define error(x) cerr << #x << " = " << x << endl
-#define sz(x) (int)(x).size()
+// PAIR
+template < typename F, typename S >
+ostream& operator << ( ostream& os, const pair< F, S > & p ) {
+    return os << "(" << p.first << ", " << p.second << ")";
+}
+
+// VECTOR
+template < typename T >
+ostream &operator << ( ostream & os, const vector< T > &v ) {
+    os << "{";
+    typename vector< T > :: const_iterator it;
+    for( it = v.begin(); it != v.end(); it++ ) {
+        if( it != v.begin() ) os << ", ";
+        os << *it;
+    }
+    return os << "}";
+}
+
+// SET
+template < typename T >
+ostream &operator << ( ostream & os, const set< T > &v ) {
+    os << "[";
+    typename set< T > :: const_iterator it;
+    for ( it = v.begin(); it != v.end(); it++ ) {
+        if( it != v.begin() ) os << ", ";
+        os << *it;
+    }
+    return os << "]";
+}
+
+// MAP
+template < typename F, typename S >
+ostream &operator << ( ostream & os, const map< F, S > &v ) {
+    os << "[";
+    typename map< F , S >::const_iterator it;
+    for( it = v.begin(); it != v.end(); it++ ) {
+        if( it != v.begin() ) os << ", ";
+        os << it -> first << " = " << it -> second ;
+    }
+    return os << "]";
+}
+
+
+const int INF = (int)1e9 + 7;
+const long long LLINF = (ll)4e18 + 7;
+const double pi = acos(-1.0);
+
+#define deb(x) cerr << #x << " = " << x << endl
+#define sz(a) static_cast<int>((a).size())
+#define all(a) (a).begin(), (a).end()
+#define sq(x) (x) * (x)
 #define eb emplace_back
 #define pb push_back
+#define mp make_pair
 #define f first
 #define s second
-#define lb lower_bound
-#define ub upper_bound
+#define endl '\n'
 
-const int MOD = 1e9 + 7;
+#define UNIQUE(a) sort(all(a)), (a).erase(unique(all(a)), (a).end())
+#define FOR(i, a, b) for (int i(a), b_(b); i < b_; ++i)
+#define REP(i, n) FOR (i, 0, n)
+#define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
-int orientation(pii p, pii q, pii r) {
-    ll x = (ll)(r.f - p.f) * (ll)(r.f - q.f) > 0;
-    ll y = (ll)(r.s - p.s) * (ll)(r.s - q.s) > 0;
-    return x != y;
+const int N = 1e5+7;
+int n;
+
+bool ccw(pii A, pii B, pii C) {
+    return (C.s-A.s) * (B.f-A.f) >= (B.s-A.s) * (C.f-A.f);
 }
 
-int intersects(pii p1, pii q1, pii p2, pii q2) {
-    int o1 = orientation(p1, q1, p2);
-    int o2 = orientation(p1, q1, q2);
-    int o3 = orientation(p2, q2, p1);
-    int o4 = orientation(p2, q2, q1);
-    return (o1 != o2 && o3 != o4);
+bool intersects(pii A, pii B, pii C, pii D) {
+    return ccw(A,C,D) != ccw(B,C,D) and ccw(A,B,C) != ccw(A,B,D);
 }
 
-int T;
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> T;
-    for (int tt = 0; tt < T; ++tt) {
-        int n; cin >> n;
-        vector<pair<pii,pii>> lines;
-        for (int i = 0; i < n; ++i) {
-            int a, b, c, d; cin >> a >> b >> c >> d;
-            lines.pb({{a,b}, {c,d}});
+    int T; cin >> T;
+    REP(t, T) {
+        cin >> n;
+        vector<pair<pii, pii>> seg(n);
+        REP(i, n) {
+            cin >> seg[i].f.f >> seg[i].f.s >> seg[i].s.f >> seg[i].s.s;
         }
         int cnt = 0;
-        for (int i = 0; i < n; ++i) {
-            for (int j = i+1; j < n; ++j)
-                if (intersects(lines[i].f, lines[i].s, lines[j].f, lines[j].s))
-                    ++cnt;
+        REP(i, n) FOR(j, i+1, n) {
+            if (intersects(seg[i].f, seg[i].s, seg[j].f, seg[j].s)) ++cnt;
         }
-        if (tt) cout << '\n';
-        cout << 2 * cnt + n << '\n';
+        if(t) cout << endl;
+        cout << cnt * 2 + n << endl;
     }
     return 0;
 }
