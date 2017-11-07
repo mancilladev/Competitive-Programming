@@ -17,6 +17,8 @@ const int INF = 1e9+7;
 int n, m, i, j, a, b;
 
 int check(int x, int y) {
+    if (x == i && y == j) return 0;
+    
     if (i - a < 1 && i + a > n) return INF;
     if (j - b < 1 && j + b > m) return INF;
     if (abs(x - i) % a) return INF;
