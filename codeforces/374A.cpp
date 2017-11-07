@@ -17,11 +17,15 @@ const int INF = 1e9+7;
 int n, m, i, j, a, b;
 
 int check(int x, int y) {
-    int d1 = abs(x - i);
-    int d2 = abs(y - j);
-    if (d1%a != 0 || d2%b != 0) return INF;
-    if (((d1/a)&1) != ((d2/b)&1)) return INF;
-    return max(d1/a, d2/b);
+    if (i - a < 1 && i + a > n) return INF;
+    if (j - b < 1 && j + b > m) return INF;
+    if (abs(x - i) % a) return INF;
+    if (abs(y - j) % b) return INF;
+    
+    int cost = max(abs(x - i) / a, abs(y - j) / b);
+    int tmp = abs(x - i) / a + abs(y - j) / b;
+    if (tmp&1) return INF;
+    return cost;
 }
 
 int main(void) {
