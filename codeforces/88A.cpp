@@ -32,28 +32,28 @@ const double pi = acos(-1.0);
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
 const int N = 1e5+7;
-int n, v;
-ll res;
+vector<string> notes {"C","C#","D","D#","E","F","F#","G","G#","A","B","H"};
+vector<string> triad(3);
+
+int dist(string a, string b) {
+    int pos = distance(notes.begin(), find(all(notes), a));
+    FOR(i, 1, sz(notes)) {
+        if (notes[(pos+i)%sz(notes)] == b)
+            return i;
+    }
+    return 0;
+}
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> n >> v;
-    vector<pii> a(n);
-    REP(i, n) {
-        cin >> a[i].f >> a[i].s;
-    }
-    int last = 0;
-    FOR(day, 1, 3002) {
-        int cur = 0;
-        REP(i, n) if (a[i].f == day) cur += a[i].s;
-        if (cur + last <= v) {
-            res += cur + last;
-            last = 0;
-        } else {
-            res += v;
-            last = cur - max(0, v-last);
-        }
-    }
-    cout << res << endl;
+    REP(i, 3) cin >> triad[i];
+    sort(all(triad));
+    do {
+        int d1 = dist(triad[0], triad[1]);
+        int d2 = dist(triad[1], triad[2]);
+        if (d1 == 4 && d2 == 3) return cout << "major" << endl, 0;
+        if (d1 == 3 && d2 == 4) return cout << "minor" << endl, 0;
+    } while (next_permutation(all(triad)));
+    cout << "strange" << endl;
     return 0;
 }

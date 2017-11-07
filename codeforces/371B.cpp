@@ -32,28 +32,18 @@ const double pi = acos(-1.0);
 #define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
 
 const int N = 1e5+7;
-int n, v;
-ll res;
+int a, b, A[3], B[3];
 
 int main(void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> n >> v;
-    vector<pii> a(n);
-    REP(i, n) {
-        cin >> a[i].f >> a[i].s;
-    }
-    int last = 0;
-    FOR(day, 1, 3002) {
-        int cur = 0;
-        REP(i, n) if (a[i].f == day) cur += a[i].s;
-        if (cur + last <= v) {
-            res += cur + last;
-            last = 0;
-        } else {
-            res += v;
-            last = cur - max(0, v-last);
-        }
-    }
-    cout << res << endl;
+    cin >> a >> b;
+    while (a%2 == 0) A[0]++, a /= 2;
+    while (a%3 == 0) A[1]++, a /= 3;
+    while (a%5 == 0) A[2]++, a /= 5;
+    while (b%2 == 0) B[0]++, b /= 2;
+    while (b%3 == 0) B[1]++, b /= 3;
+    while (b%5 == 0) B[2]++, b /= 5;
+    int suma = abs(A[0] - B[0]) + abs(A[1] - B[1]) + abs(A[2] - B[2]);
+    cout << (a == b ? suma : -1) << endl;
     return 0;
 }
