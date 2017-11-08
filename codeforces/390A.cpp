@@ -17,9 +17,17 @@ const int INF = (int)1e9 + 7;
 #define s second
 #define endl '\n'
 
-int n;
+int n, done[107], res;
+unordered_set<int> ver, hor;
 
 int main(void) {
     cin >> n;
+    vector<pii> a(n);
+    REP(i, n) {
+        cin >> a[i].f >> a[i].s;
+        ver.insert(a[i].f);
+        hor.insert(a[i].s);
+    }
+    cout << min(sz(ver), sz(hor)) << endl;
 	return 0;
 }

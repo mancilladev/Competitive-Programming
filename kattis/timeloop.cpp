@@ -21,5 +21,8 @@ int n;
 
 int main(void) {
     cin >> n;
+    REP(i, n) {
+        cout << i+1 << ' ' << "Abracadabra" << endl;
+    }
 	return 0;
 }

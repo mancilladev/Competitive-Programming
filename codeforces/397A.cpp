@@ -17,9 +17,20 @@ const int INF = (int)1e9 + 7;
 #define s second
 #define endl '\n'
 
-int n;
+const int N = 107;
+int n, res, l[N], r[N];
 
 int main(void) {
     cin >> n;
+    REP(i, n) {
+        cin >> l[i] >> r[i];
+    }
+    
+    FOR(i, l[0], r[0]) {
+        bool flag = 1;
+        FOR(j, 1, n) if (l[j] <= i && r[j] > i) flag = 0;
+        res += flag;
+    }
+    cout << res << endl;
 	return 0;
 }
