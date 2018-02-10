@@ -16,7 +16,7 @@ const long long LLINF = (ll)4e18 + 7;
 const double pi = acos(-1.0);
 
 #define deb(x) cerr << #x << " = " << x << endl
-#define sz(a) static_cast<int>((a).size())
+#define sz(a) (int)(a).size()
 #define all(a) (a).begin(), (a).end()
 #define sq(x) (x) * (x)
 #define eb emplace_back
