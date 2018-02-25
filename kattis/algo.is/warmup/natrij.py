@@ -7,4 +7,7 @@ if t2 < t1:
     t2 += timedelta(days=1)
 t2 -= t1
 s = str(t2)
-print("{:0>8}".format(s))
+if s == '0:00:00':
+    print('24:00:00')
+else:
+    print("{:0>8}".format(s))
