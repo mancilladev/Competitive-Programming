@@ -22,14 +22,14 @@ const double pi = acos(-1.0);
 #define eb emplace_back
 #define pb push_back
 #define mp make_pair
-#define f first
-#define s second
+#define fi first
+#define se second
 #define endl '\n'
 
 #define UNIQUE(a) sort(all(a)), (a).erase(unique(all(a)), (a).end())
-#define FOR(i, a, b) for (int i(a), b_(b); i < b_; ++i)
+#define FOR(i, a, b) for (int i(a); i < b; ++i)
 #define REP(i, n) FOR (i, 0, n)
-#define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
+#define FORD(i, a, b) for (int i(a); i >= b; --i)
 
 const int N = 1e5+7;
 int n;

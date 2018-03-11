@@ -4,9 +4,9 @@ import sys
 import os
 
 print(sys.argv)
-flags = sys.argv[2:]
+flags = sys.argv[1:]
 
-filename = sys.argv[1]
+filename = [f for f in flags if '-' not in f][0]
 if not filename.endswith('.cpp'):
     filename += '.cpp'
 filepath = os.path.join(os.getcwd(), filename)

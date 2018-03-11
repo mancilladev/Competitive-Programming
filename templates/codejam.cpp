@@ -15,24 +15,25 @@ inline void OPEN (string s) {
     freopen((s + ".out").c_str(), "w", stdout);
 }
 
-const int INF = static_cast<int>(1e9);
-const long long LLINF = static_cast<long long>(4e18);
+const int INF = (int)1e9 + 7;
+const long long LLINF = (ll)4e18 + 7;
 const double pi = acos(-1.0);
 
 #define deb(x) cerr << #x << " = " << x << endl
-#define sz(a) static_cast<int>((a).size())
+#define sz(a) (int)(a).size()
 #define all(a) (a).begin(), (a).end()
 #define sq(x) (x) * (x)
 #define eb emplace_back
 #define pb push_back
-#define f first
-#define s second
+#define mp make_pair
+#define fi first
+#define se second
 #define endl '\n'
 
 #define UNIQUE(a) sort(all(a)), (a).erase(unique(all(a)), (a).end())
-#define FOR(i, a, b) for (int i(a), b_(b); i < b_; ++i)
+#define FOR(i, a, b) for (int i(a); i < b; ++i)
 #define REP(i, n) FOR (i, 0, n)
-#define FORD(i, a, b) for (int i(a), b_(b); i >= b_; --i)
+#define FORD(i, a, b) for (int i(a); i >= b; --i)
 
 ll T, N, M;
 
@@ -49,7 +50,7 @@ int main() {
     }
 
 #ifdef LOCAL
-    cout << "\n\n" << static_cast<double>(clock()) / CLOCKS_PER_SEC << endl;
+    cout << "\n\n" << (double)clock()/CLOCKS_PER_SEC << endl;
 #endif
     return 0;
 }
