@@ -37,7 +37,7 @@ const double pi = acos(-1.0);
 
 ll T, N, M;
 
-int main() {
+int main (void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
     OPEN("A");
 

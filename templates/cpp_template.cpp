@@ -34,7 +34,7 @@ const double pi = acos(-1.0);
 const int N = 1e5+7;
 int n;
 
-int main(void) {
+int main (void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
     cin >> n;
     vector<int> a(n);

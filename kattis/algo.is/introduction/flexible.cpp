@@ -17,12 +17,21 @@ const int INF = (int)1e9 + 7;
 #define FORD(i, a, b) for (int i(a); i >= b; --i)
 
 const int N = 1e5 + 7;
-int n;
+int w, p;
 
 int main (void) {
-    cin >> n;
-    vector<int> a(n);
-    REP(i, n) cin >> a[i];
+    cin >> w >> p;
+    vector<int> a(p+1, 0);
+    REP(i, p) cin >> a[i+1];
+    a.pb(w);
 
+    set<int> st;
+    REP(i, sz(a)) {
+        FOR(j, i+1, sz(a)) {
+            st.insert(a[j] - a[i]);
+        }
+    }
+    for (auto x : st) cout << x << ' ';
+    cout << endl;
     return 0;
 }

@@ -21,8 +21,20 @@ int n;
 
 int main (void) {
     cin >> n;
-    vector<int> a(n);
-    REP(i, n) cin >> a[i];
-
+    REP(i, n) {
+        string s;
+        cin >> s;
+        int k = 1;
+        while (sq(k) < sz(s))
+            ++k;
+        string res;
+        REP(x, k) {
+            FORD(y, k-1, 0) {
+                if (y * k + x >= sz(s)) continue;
+                res += s[y*k + x];
+            }
+        }
+        cout << res << endl;
+    }
     return 0;
 }
