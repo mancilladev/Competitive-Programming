@@ -36,16 +36,42 @@ const double pi = acos(-1.0);
 #define FORD(i, a, b) for (int i(a); i >= b; --i)
 
 ll T, N, M;
+string S;
+
+bool ok () {
+    for (auto c : S)
+        if (c == '-')
+            return false;
+    return true;
+}
+
+int solve () {
+    int res = 0;
+    while (!ok()) {
+        bool flag = 0;
+        FORD(i, sz(S)-1, 0) {
+            if (!flag && S[i] == '-') {
+                flag = 1;
+            }
+            if (flag) {
+                S[i] = (S[i] == '+' ? '-' : '+');
+            }
+        }
+        ++res;
+    }
+    return res;
+}
 
 int main (void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    OPEN("A");
+    OPEN("B-large-practice");
 
     cin >> T;
     FOR (tt, 1, T+1) {
-        cin >> N >> M;
+        cin >> S;
 
         cout << "Case #" << tt << ": ";
+        cout << solve();
         cout << '\n';
     }
 

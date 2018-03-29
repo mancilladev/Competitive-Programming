@@ -37,16 +37,31 @@ const double pi = acos(-1.0);
 
 ll T, N, M;
 
+ll solve() {
+    ll digits = 0;
+    ll x = 1;
+    while (true) {
+        ll y = x * N;
+        while (y) {
+            digits |= (1 << (y%10));
+            y /= 10;
+        }
+        if (((1<<10) - 1) == digits)
+            return x * N;
+        ++x;
+    }
+}
+
 int main (void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    OPEN("A");
+    OPEN("A-large-practice");
 
     cin >> T;
     FOR (tt, 1, T+1) {
-        cin >> N >> M;
-
+        cin >> N;
         cout << "Case #" << tt << ": ";
-        cout << '\n';
+        if (N == 0) cout << "INSOMNIA\n";
+        else cout << solve() << endl;
     }
 
 #ifdef LOCAL
