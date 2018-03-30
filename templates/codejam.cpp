@@ -23,9 +23,6 @@ const double pi = acos(-1.0);
 #define sz(a) (int)(a).size()
 #define all(a) (a).begin(), (a).end()
 #define sq(x) (x) * (x)
-#define eb emplace_back
-#define pb push_back
-#define mp make_pair
 #define fi first
 #define se second
 #define endl '\n'

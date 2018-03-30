@@ -19,28 +19,22 @@ const double pi = acos(-1.0);
 #define sz(a) (int)(a).size()
 #define all(a) (a).begin(), (a).end()
 #define sq(x) (x) * (x)
-#define eb emplace_back
-#define pb push_back
-#define mp make_pair
 #define fi first
 #define se second
-#define endl '\n'
 
 #define UNIQUE(a) sort(all(a)), (a).erase(unique(all(a)), (a).end())
 #define FOR(i, a, b) for (int i(a); i < b; ++i)
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a); i >= b; --i)
 
-const int N = 1e5+7;
+const int Z = 1e5 + 7;
 int n;
 
 int main (void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
     cin >> n;
     vector<int> a(n);
-    REP(i, n) {
-        cin >> a[i];
-    }
+    REP(i, n) cin >> a[i];
 
     return 0;
 }
