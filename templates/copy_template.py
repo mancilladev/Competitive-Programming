@@ -4,9 +4,9 @@ import sys
 import os
 
 print(sys.argv)
-flags = sys.argv[1:]
 
-filename = [f for f in flags if '-' not in f][0]
+filename = [f for f in sys.argv[1:] if '-' not in f][0]
+flags = [f for f in sys.argv[1:] if f != filename]
 
 if not filename.endswith('.cpp') and not filename.endswith('.py'):
     if any('p' in f for f in flags):
@@ -25,7 +25,9 @@ if any('i' in f for f in flags):
 elif any('j' in f for f in flags):
     templatepath = '~/cp/templates/codejam.cpp'
 
-os.system('cp {0} {1}'.format(templatepath, filepath))
+instruction = 'cp {0} {1}'.format(templatepath, filepath)
+print(instruction)
+os.system(instruction)
 
 vim = any('v' in f for f in flags)
 os.system('{0} {1}'.format('nvim' if vim else 'subl', filepath))
