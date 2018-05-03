@@ -10,10 +10,12 @@ typedef long double ld;
 typedef pair<int,int> pii;
 template <class T> using min_queue = priority_queue<T, vector<T>, greater<T>>;
 template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+#ifdef LOCAL
 inline void OPEN (string s) {
     freopen((s + ".in").c_str(), "r", stdin);
     freopen((s + ".out").c_str(), "w", stdout);
 }
+#endif
 
 const int INF = (int)1e9 + 7;
 const long long LLINF = (ll)4e18 + 7;
@@ -40,7 +42,9 @@ ll solve () {
 
 int main (void) {
     ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    OPEN("A");
+#ifdef LOCAL
+    OPEN("p1");
+#endif
 
     cin >> T;
     FOR (tt, 1, T+1) {
