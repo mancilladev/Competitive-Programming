@@ -14,15 +14,35 @@ const int INF = (int)1e9 + 7;
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a); i >= b; --i)
 
-const int MN = 2e5 + 7;
-int N;
+const ll Z = 1e9 + 1, MN = 2e5 + 7;
+ll N, K;
+int a[MN];
+
+int count (ll q) {
+    int cnt = 0;
+    REP(i, N) {
+        if (a[i] <= q) {
+            ++cnt;
+        }
+    }
+    return cnt;
+}
 
 int main (void) {
-    while (cin >> N) {
-        vector<int> a(N);
+    ios_base::sync_with_stdio(0), cin.tie(nullptr);
+    while (cin >> N >> K) {
         REP(i, N) {
             cin >> a[i];
         }
+
+        ll res = 1;
+        for (ll k = (Z >> 1); k >= 1; k >>= 1) {
+            while (res + k < Z && count(res+k) <= K) {
+                res += k;
+            }
+        }
+
+        cout << (count(res) == K ? res : -1) << '\n';
     }
     return 0;
 }

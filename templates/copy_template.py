@@ -15,6 +15,11 @@ if not filename.endswith('.cpp') and not filename.endswith('.py'):
         filename += '.cpp'
 filepath = os.path.join(os.getcwd(), filename)
 
+if os.path.isfile(filepath):
+    print('FILE EXISTS!')
+    print('Exiting...')
+    sys.exit(0)
+
 if filename.endswith('.cpp'):
     templatepath = '~/cp/templates/cpp_template.cpp'
 else:

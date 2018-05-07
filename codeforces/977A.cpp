@@ -14,15 +14,22 @@ const int INF = (int)1e9 + 7;
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a); i >= b; --i)
 
-const int MN = 2e5 + 7;
-int N;
+const int Z = 1e5 + 7;
+int n, k;
 
 int main (void) {
-    while (cin >> N) {
-        vector<int> a(N);
-        REP(i, N) {
-            cin >> a[i];
+    cin >> n >> k;
+    while (k--) {
+        if (log10(n)+1 == 1) {
+            n--;
+            continue;
+        }
+        if (n%10 == 0) {
+            n /= 10;
+        } else {
+            n--;
         }
     }
+    cout << n << endl;
     return 0;
 }

@@ -14,15 +14,30 @@ const int INF = (int)1e9 + 7;
 #define REP(i, n) FOR (i, 0, n)
 #define FORD(i, a, b) for (int i(a); i >= b; --i)
 
-const int MN = 2e5 + 7;
-int N;
+const int Z = 1e5 + 7;
+int n;
+
+int get(ll x) {
+    int ans = 0;
+    while (x%3 == 0)
+        ++ans, x /= 3;
+    return ans;
+}
+
+bool cmp (ll x, ll y) {
+    if (get(x) != get(y))
+        return get(x) > get(y);
+    return x < y;
+}
 
 int main (void) {
-    while (cin >> N) {
-        vector<int> a(N);
-        REP(i, N) {
-            cin >> a[i];
-        }
+    while (cin >> n) {
+        vector<ll> a(n);
+        REP(i, n) cin >> a[i];
+        sort(all(a), cmp);
+        for (auto it : a)
+            cout << it << ' ';
+        cout << '\n';
     }
     return 0;
 }
