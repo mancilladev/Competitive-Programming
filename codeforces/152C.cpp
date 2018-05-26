@@ -19,10 +19,21 @@ int main (void) {
     cout.precision(10);
     cout << fixed;
 
-    int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        forn(i, n) cin >> arr[i];
+    int n, m;
+    const int MOD = 1e9 + 7;
+    while (cin >> n >> m) {
+        vector<set<char>> v(m);
+        forn(i, n) {
+            string s; cin >> s;
+            forn(j, m) v[j].insert(s[j]);
+        }
+        ll ans = sz(v[0]);
+        for1(j, m-1) {
+            int cnt = sz(v[j]);
+            ans *= cnt;
+            ans %= MOD;
+        }
+        cout << ans << '\n';
     }
     return 0;
 }

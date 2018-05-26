@@ -53,26 +53,26 @@ int main (void) {
     cin.tie(0);
     cout.precision(10);
     cout << fixed;
-    int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        map<int,int> x, y;
-        map<pii,int> dots;
-        forn(i, n) {
-            int a, b; cin >> a >> b;
-            x[a] += 1;
-            y[b] += 1;
-            pii p = make_pair(a, b);
-            dots[p] += 1;
+
+    int N, M;
+    string S;
+    while (cin >> N >> M >> S) {
+        map<char,char> mp;
+        for (auto c : S) {
+            mp[c] = c;
         }
-        function<ll(ll)> choose2 = [&](ll n) {
-            return n * (n-1) / 2;
-        };
-        ll ans = 0;
-        for (auto p : x) ans += choose2(p.se);
-        for (auto p : y) ans += choose2(p.se);
-        for (auto p : dots) ans -= choose2(p.se);
-        cout << ans << '\n';
+        forn(i, M) {
+            char x, y; cin >> x >> y;
+            if (x == y) continue;
+            for (auto& p : mp) {
+                if (p.se == x) p.se = y;
+                else if (p.se == y) p.se = x;
+            }
+        }
+        forn(i, N) {
+            S[i] = mp[S[i]];
+        }
+        cout << S << '\n';
     }
     return 0;
 }

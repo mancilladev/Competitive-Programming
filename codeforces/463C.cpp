@@ -48,31 +48,39 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
     return os << "]";
 }
 
+int arr[2007][2007];
+
 int main (void) {
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.precision(10);
     cout << fixed;
+
     int n;
     while (cin >> n) {
-        vector<int> arr(n);
-        map<int,int> x, y;
-        map<pii,int> dots;
-        forn(i, n) {
-            int a, b; cin >> a >> b;
-            x[a] += 1;
-            y[b] += 1;
-            pii p = make_pair(a, b);
-            dots[p] += 1;
-        }
-        function<ll(ll)> choose2 = [&](ll n) {
-            return n * (n-1) / 2;
+        function<int(int,int,int)> getd = [&](int y, int x, int d) {
+            assert(d == 1 || d == 2);
+            return (d == 1 ? y + x : y + (n - x - 1));
         };
-        ll ans = 0;
-        for (auto p : x) ans += choose2(p.se);
-        for (auto p : y) ans += choose2(p.se);
-        for (auto p : dots) ans -= choose2(p.se);
-        cout << ans << '\n';
+        vector<ll> d1(2*(n-1)+1, 0), d2(2*(n-1)+1, 0);
+        forn(i, n) forn(j, n) {
+            cin >> arr[i][j];
+            d1[getd(i, j, 1)] += arr[i][j];
+            d2[getd(i, j, 2)] += arr[i][j];
+        }
+        vector<pii> v(2);
+        vector<ll> res(2, -1);
+        forn(i, n) forn(j, n) {
+            ll val = d1[getd(i, j, 1)] + d2[getd(i, j, 2)] - arr[i][j];
+            ll c = (i+j)&1;
+            if (val > res[c]) {
+                res[c] = val;
+                v[c] = make_pair(i+1, j+1);
+            }
+        }
+        cout << res[0] + res[1] << '\n';
+        cout << v[0].fi << ' ' << v[0].se << ' ';
+        cout << v[1].fi << ' ' << v[1].se << '\n';
     }
     return 0;
 }

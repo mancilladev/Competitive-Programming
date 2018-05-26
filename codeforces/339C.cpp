@@ -53,26 +53,36 @@ int main (void) {
     cin.tie(0);
     cout.precision(10);
     cout << fixed;
-    int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        map<int,int> x, y;
-        map<pii,int> dots;
-        forn(i, n) {
-            int a, b; cin >> a >> b;
-            x[a] += 1;
-            y[b] += 1;
-            pii p = make_pair(a, b);
-            dots[p] += 1;
-        }
-        function<ll(ll)> choose2 = [&](ll n) {
-            return n * (n-1) / 2;
+
+    int m;
+    string s;
+    while (cin >> s >> m) {
+        vector<int> valid(11);
+        forn(i, 10) valid[i+1] = (s[i] == '1');
+        vector<int> res;
+        vector<int> cnt(2, 0);
+        function<bool(int,int)> dfs = [&](int k, int last) {
+            if (k == m) return true;
+            for1(x, 10) {
+                if (!valid[x] || x == last) continue;
+                if (cnt[k&1] + x <= cnt[!(k&1)]) continue;
+                cnt[k&1] += x;
+                if (dfs(k+1, x)) {
+                    res.push_back(x);
+                    return true;
+                }
+                cnt[k&1] -= x;
+            }
+            return false;
         };
-        ll ans = 0;
-        for (auto p : x) ans += choose2(p.se);
-        for (auto p : y) ans += choose2(p.se);
-        for (auto p : dots) ans -= choose2(p.se);
-        cout << ans << '\n';
+        if (!dfs(0, -1)) {
+            cout << "NO\n";
+        } else {
+            cout << "YES\n";
+            reverse(all(res));
+            for (auto it : res) cout << it << ' ';
+            cout << '\n';
+        }
     }
     return 0;
 }

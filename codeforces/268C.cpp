@@ -19,10 +19,12 @@ int main (void) {
     cout.precision(10);
     cout << fixed;
 
-    int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        forn(i, n) cin >> arr[i];
+    int N, M;
+    while (cin >> N >> M) {
+        ++N, ++M;
+        int ans = min(N, M);
+        cout << ans << '\n';
+        forn(i, ans) cout << i << ' ' << ans-i-1 << '\n';
     }
     return 0;
 }

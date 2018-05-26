@@ -53,26 +53,42 @@ int main (void) {
     cin.tie(0);
     cout.precision(10);
     cout << fixed;
-    int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        map<int,int> x, y;
-        map<pii,int> dots;
-        forn(i, n) {
-            int a, b; cin >> a >> b;
-            x[a] += 1;
-            y[b] += 1;
-            pii p = make_pair(a, b);
-            dots[p] += 1;
-        }
-        function<ll(ll)> choose2 = [&](ll n) {
-            return n * (n-1) / 2;
+
+    int N, M, K;
+    const int MN = 307;
+    const int dx[4] = {1, -1, 0, 0};
+    const int dy[4] = {0, 0, 1, -1};
+    while (cin >> N >> M >> K) {
+        bool used[MN][MN];
+        memset(used, 0, sizeof used);
+        pii last = {1, 1};
+        function<void(pii,int)> dfs = [&](pii p, int cnt) {
+            last = p;
+            if (cnt == 0) return;
+
+            int y = p.fi, x = p.se;
+            used[y][x] = true;
+            cout << y << ' ' << x << ' ';
+
+            forn(i, 4) {
+                int yy = y + dy[i];
+                int xx = x + dx[i];
+                if (yy < 1 || yy > N || xx < 1 || xx > M) continue;
+                if (used[yy][xx]) continue;
+
+                dfs(make_pair(yy, xx), cnt - 1);
+                break;
+            }
         };
-        ll ans = 0;
-        for (auto p : x) ans += choose2(p.se);
-        for (auto p : y) ans += choose2(p.se);
-        for (auto p : dots) ans -= choose2(p.se);
-        cout << ans << '\n';
+        forn(i, K) {
+            int cnt = (N * M) / K;
+            if (i+1 == K) {
+                cnt += (N * M) % K;
+            }
+            cout << cnt << ' ';
+            dfs(last, cnt);
+            cout << '\n';
+        }
     }
     return 0;
 }

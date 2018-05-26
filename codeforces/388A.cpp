@@ -23,6 +23,27 @@ int main (void) {
     while (cin >> n) {
         vector<int> arr(n);
         forn(i, n) cin >> arr[i];
+        sort(all(arr));
+        function<bool(int)> solves = [&](int k) {
+            int cur = 0;
+            int h = 0;
+            while (cur < n) {
+                if (arr[cur++] < h)
+                    return false;
+                if (cur % k == 0) {
+                    ++h;
+                }
+            }
+            return true;
+        };
+        int ans = 100;
+        for1(i, 100) {
+            if (solves(i)) {
+                ans = i;
+                break;
+            }
+        }
+        cout << ans << '\n';
     }
     return 0;
 }

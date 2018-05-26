@@ -53,25 +53,29 @@ int main (void) {
     cin.tie(0);
     cout.precision(10);
     cout << fixed;
+
     int n;
+    const int MN = log10(1e9) + 1;
     while (cin >> n) {
-        vector<int> arr(n);
-        map<int,int> x, y;
-        map<pii,int> dots;
-        forn(i, n) {
-            int a, b; cin >> a >> b;
-            x[a] += 1;
-            y[b] += 1;
-            pii p = make_pair(a, b);
-            dots[p] += 1;
-        }
-        function<ll(ll)> choose2 = [&](ll n) {
-            return n * (n-1) / 2;
+        function<bool(int,int)> mt = [](int bin, int x) {
+            vector<int> d1;
+            while (bin) {
+                d1.push_back(bin&1);
+                bin /= 2;
+            }
+            reverse(all(d1));
+            int y = 0;
+            for (auto it : d1) {
+                y *= 10;
+                y += it;
+            }
+            return y > x;
         };
-        ll ans = 0;
-        for (auto p : x) ans += choose2(p.se);
-        for (auto p : y) ans += choose2(p.se);
-        for (auto p : dots) ans -= choose2(p.se);
+        int ans = 0;
+        for1(i, (1<<MN) + 1) {
+            if (mt(i, n)) break;
+            ans = i;
+        }
         cout << ans << '\n';
     }
     return 0;

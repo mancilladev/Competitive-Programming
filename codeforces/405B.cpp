@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#define mp make_pair
 #define fi first
 #define se second
 #define sz(a) (int)(a).size()
@@ -53,25 +54,27 @@ int main (void) {
     cin.tie(0);
     cout.precision(10);
     cout << fixed;
-    int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        map<int,int> x, y;
-        map<pii,int> dots;
-        forn(i, n) {
-            int a, b; cin >> a >> b;
-            x[a] += 1;
-            y[b] += 1;
-            pii p = make_pair(a, b);
-            dots[p] += 1;
+
+    int N;
+    string S;
+    while (cin >> N >> S) {
+        vector<int> a(N), b(N);
+        int cnt = 0;
+        ford(i, N) {
+            if (S[i] == 'L') cnt = 1;
+            if (S[i] == 'R') cnt = 0;
+            a[i] = cnt;
+            if (cnt > 0) ++cnt;
         }
-        function<ll(ll)> choose2 = [&](ll n) {
-            return n * (n-1) / 2;
-        };
-        ll ans = 0;
-        for (auto p : x) ans += choose2(p.se);
-        for (auto p : y) ans += choose2(p.se);
-        for (auto p : dots) ans -= choose2(p.se);
+        cnt = 0;
+        forn(i, N) {
+            if (S[i] == 'R') cnt = 1;
+            if (S[i] == 'L') cnt = 0;
+            b[i] = cnt;
+            if (cnt > 0) ++cnt;
+        }
+        int ans = 0;
+        forn(i, N) ans += (a[i] == b[i]);
         cout << ans << '\n';
     }
     return 0;

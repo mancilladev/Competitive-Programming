@@ -53,25 +53,25 @@ int main (void) {
     cin.tie(0);
     cout.precision(10);
     cout << fixed;
+
     int n;
     while (cin >> n) {
-        vector<int> arr(n);
-        map<int,int> x, y;
-        map<pii,int> dots;
+        n--;
+        int cnt; cin >> cnt;
+        multiset<int> ms;
         forn(i, n) {
-            int a, b; cin >> a >> b;
-            x[a] += 1;
-            y[b] += 1;
-            pii p = make_pair(a, b);
-            dots[p] += 1;
+            int x; cin >> x;
+            ms.insert(x);
         }
-        function<ll(ll)> choose2 = [&](ll n) {
-            return n * (n-1) / 2;
-        };
-        ll ans = 0;
-        for (auto p : x) ans += choose2(p.se);
-        for (auto p : y) ans += choose2(p.se);
-        for (auto p : dots) ans -= choose2(p.se);
+
+        int ans = 0;
+        while (*ms.rbegin() >= cnt) {
+            int big = *ms.rbegin();
+            ms.erase(prev(ms.end()));
+            ms.insert(big-1);
+            ++ans;
+            ++cnt;
+        }
         cout << ans << '\n';
     }
     return 0;

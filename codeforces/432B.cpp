@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#define mp make_pair
 #define fi first
 #define se second
 #define sz(a) (int)(a).size()
@@ -19,10 +20,16 @@ int main (void) {
     cout.precision(10);
     cout << fixed;
 
-    int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        forn(i, n) cin >> arr[i];
+    int N;
+    while (cin >> N) {
+        vector<pii> arr(N);
+        forn(i, N) cin >> arr[i].fi >> arr[i].se;
+        map<int,int> home;
+        forn(i, N) home[arr[i].fi]++;
+        forn(i, N) {
+            int x = home[arr[i].se] + (N-1);
+            cout << x << ' ' << (N-1)*2-x << '\n';
+        }
     }
     return 0;
 }

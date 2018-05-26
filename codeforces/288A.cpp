@@ -19,10 +19,25 @@ int main (void) {
     cout.precision(10);
     cout << fixed;
 
-    int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        forn(i, n) cin >> arr[i];
+    int n, k;
+    while (cin >> n >> k) {
+        function<string(void)> solves = [&](void) {
+            if (k == 1) return string(n == 1 ? "a" : "-1");
+            if (k > n) return string("-1");
+            string res;
+            forn(i, n-(k-2)) {
+                if (res.empty() || res.back() == 'b')
+                    res += 'a';
+                else
+                    res += 'b';
+            }
+            forn(i, k-2) {
+                res += ('a' + i + 2);
+            }
+            return res;
+        };
+        string ans = solves();
+        cout << ans << '\n';
     }
     return 0;
 }

@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#define mp make_pair
 #define fi first
 #define se second
 #define sz(a) (int)(a).size()
@@ -19,10 +20,13 @@ int main (void) {
     cout.precision(10);
     cout << fixed;
 
-    int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        forn(i, n) cin >> arr[i];
+    string S = "abcd";
+    int N;
+    while (cin >> N) {
+        forn(i, N) {
+            cout << S[i%sz(S)];
+        }
+        cout << '\n';
     }
     return 0;
 }

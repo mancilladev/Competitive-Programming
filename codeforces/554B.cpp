@@ -21,8 +21,16 @@ int main (void) {
 
     int n;
     while (cin >> n) {
-        vector<int> arr(n);
-        forn(i, n) cin >> arr[i];
+        vector<string> arr(n);
+        map<string,int> cnt;
+        forn(i, n) {
+            string s; cin >> s;
+            cnt[s] += 1;
+        }
+        auto p = *max_element(all(cnt), [](const auto p1, const auto p2) {
+            return p1.se < p2.se;
+        });
+        cout << p.se << '\n';
     }
     return 0;
 }

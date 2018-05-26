@@ -19,10 +19,23 @@ int main (void) {
     cout.precision(10);
     cout << fixed;
 
-    int n;
+    ll n;
     while (cin >> n) {
-        vector<int> arr(n);
-        forn(i, n) cin >> arr[i];
+        ll a = 0, b = 0;
+        while (4 * a <= n) {
+            b = (n - 4 * a) / 7;
+            if (4 * a + 7 * b == n) {
+                break;
+            }
+            ++a;
+        }
+        if (4 * a + 7 * b == n) {
+            forn(i, a) cout << 4;
+            forn(i, b) cout << 7;
+            cout << '\n';
+        } else {
+            cout << -1 << '\n';
+        }
     }
     return 0;
 }

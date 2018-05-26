@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#define mp make_pair
 #define fi first
 #define se second
 #define sz(a) (int)(a).size()
@@ -19,10 +20,21 @@ int main (void) {
     cout.precision(10);
     cout << fixed;
 
-    int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        forn(i, n) cin >> arr[i];
+    int N, M;
+    while (cin >> N >> M) {
+        vector<int> arr(M);
+        forn(i, M) cin >> arr[i];
+        sort(all(arr));
+        bool ok = true;
+        forn(i, M-2)  {
+            if (arr[i]+1 == arr[i+1] && arr[i+1]+1 == arr[i+2])
+                ok = false;
+        }
+        if (find(all(arr), 1) != arr.end() || find(all(arr), N) != arr.end() || !ok) {
+            cout << "NO\n";
+        } else {
+            cout << "YES\n";
+        }
     }
     return 0;
 }

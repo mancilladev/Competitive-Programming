@@ -1,40 +1,42 @@
 #include <bits/stdc++.h>
-#include <ext/pb_ds/tree_policy.hpp>
-#include <ext/pb_ds/assoc_container.hpp>
+#define fi first
+#define se second
+#define sq(x) (x) * (x)
+#define sz(a) (int)(a).size()
+#define all(a) (a).begin(), (a).end()
+#define deb(x) cout << #x << " = " << x << endl
+#define forn(i, n) for (int i = 0; i < (int)(n); ++i)
+#define for1(i, n) for (int i = 1; i <= (int)(n); ++i)
+#define fore(i, l, r) for (int i = (int)(l); i <= (int)(r); ++i)
+#define ford(i, n) for (int i = (int)(n) -1; i >= 0; --i)
 
 using namespace std;
-using namespace __gnu_pbds;
-
 typedef long long ll;
-typedef long double ld;
 typedef pair<int,int> pii;
-template <class T> using min_queue = priority_queue<T, vector<T>, greater<T>>;
-template <class T> using Tree = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+
+// COUT << PAIR
+template < typename F, typename S > ostream& operator << ( ostream& os, const pair< F, S > & p ) {return os << "(" << p.first << ", " << p.second << ")"; }
+// COUT << VECTOR
+template < typename T > ostream &operator << ( ostream & os, const vector< T > &v ) {os << "{"; typename vector< T > :: const_iterator it; for( it = v.begin(); it != v.end(); it++ ) {if( it != v.begin() ) os << ", "; os << *it; } return os << "}"; }
+// COUT << SET
+template < typename T > ostream &operator << ( ostream & os, const set< T > &v ) {os << "["; typename set< T > :: const_iterator it; for ( it = v.begin(); it != v.end(); it++ ) {if( it != v.begin() ) os << ", "; os << *it; } return os << "]"; }
+// COUT << MAP
+template < typename F, typename S > ostream &operator << ( ostream & os, const map< F, S > &v ) {os << "["; typename map< F , S >::const_iterator it; for( it = v.begin(); it != v.end(); it++ ) {if( it != v.begin() ) os << ", "; os << it -> first << " = " << it -> second ; } return os << "]"; }
 
 const int INF = (int)1e9 + 7;
 const long long LLINF = (ll)4e18 + 7;
 const double pi = acos(-1.0);
 
-#define deb(x) cerr << #x << " = " << x << endl
-#define sz(a) (int)(a).size()
-#define all(a) (a).begin(), (a).end()
-#define sq(x) (x) * (x)
-#define fi first
-#define se second
-
-#define UNIQUE(a) sort(all(a)), (a).erase(unique(all(a)), (a).end())
-#define FOR(i, a, b) for (int i(a); i < b; ++i)
-#define REP(i, n) FOR (i, 0, n)
-#define FORD(i, a, b) for (int i(a); i >= b; --i)
-
-const int Z = 1e5 + 7;
-int n;
-
 int main (void) {
-    ios_base::sync_with_stdio(0), cin.tie(nullptr);
-    cin >> n;
-    vector<int> a(n);
-    REP(i, n) cin >> a[i];
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.precision(10);
+    cout << fixed;
 
+    int n;
+    while (cin >> n) {
+        vector<int> arr(n);
+        forn(i, n) cin >> arr[i];
+    }
     return 0;
 }

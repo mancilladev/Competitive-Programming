@@ -53,26 +53,38 @@ int main (void) {
     cin.tie(0);
     cout.precision(10);
     cout << fixed;
-    int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        map<int,int> x, y;
-        map<pii,int> dots;
-        forn(i, n) {
-            int a, b; cin >> a >> b;
-            x[a] += 1;
-            y[b] += 1;
-            pii p = make_pair(a, b);
-            dots[p] += 1;
+
+    string S;
+    int a, b;
+    while (cin >> S >> a >> b) {
+        int n = sz(S);
+        vector<int> rema(n+1, 0), remb(n+1, 0);
+        for1(i, n) {
+            int c = S[i-1] - '0';
+            rema[i] = (rema[i-1] * 10 + c)%a;
         }
-        function<ll(ll)> choose2 = [&](ll n) {
-            return n * (n-1) / 2;
-        };
-        ll ans = 0;
-        for (auto p : x) ans += choose2(p.se);
-        for (auto p : y) ans += choose2(p.se);
-        for (auto p : dots) ans -= choose2(p.se);
-        cout << ans << '\n';
+        int l = 1;
+        ford(i, n) {
+            int c = S[i] - '0';
+            remb[i] = (c * l + remb[i+1])%b;
+            l *= 10;
+            l %= b;
+        }
+        int pos = -1;
+        forn(i, n-1) if (rema[i+1] == 0 && remb[i+1] == 0) {
+            if (S[0] == '0') break;
+            if (S[i+1] == '0') continue;
+            pos = i+1;
+            break;
+        }
+        if (pos == -1) cout << "NO\n";
+        else {
+            cout << "YES\n";
+            forn(i, pos) cout << S[i];
+            cout << '\n';
+            fore(i, pos, n-1) cout << S[i];
+            cout << '\n';
+        }
     }
     return 0;
 }
