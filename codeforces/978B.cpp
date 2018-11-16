@@ -13,14 +13,26 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> pii;
 
-int main () {
-    ios::sync_with_stdio(false), cin.tie(nullptr);
-    cout.precision(10), cout << fixed;
+int main (void) {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.precision(10);
+    cout << fixed;
 
     int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        forn(i, n) cin >> arr[i];
+    string s;
+    while (cin >> n >> s) {
+        int ans = 0;
+        int cnt = 0;
+        forn(i, n) {
+            if (s[i] == 'x') {
+                if (cnt == 2) ++ans;
+                else ++cnt;
+            } else {
+                cnt = 0;
+            }
+        }
+        cout << ans << '\n';
     }
     return 0;
 }

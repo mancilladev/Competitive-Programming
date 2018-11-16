@@ -13,14 +13,23 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> pii;
 
-int main () {
-    ios::sync_with_stdio(false), cin.tie(nullptr);
+int main (void) {
+    ios::sync_with_stdio(false), cin.tie(0);
     cout.precision(10), cout << fixed;
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
 
-    int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        forn(i, n) cin >> arr[i];
+    int n, k;
+    while (cin >> n >> k) {
+        vector<pii> arr(n);
+        forn(i, n) {
+            int x; cin >> x;
+            arr[i] = make_pair(x, i+1);
+        }
+        sort(all(arr), greater<pii>());
+        cout << arr[k-1].fi << '\n';
+        forn(i, k) cout << arr[i].se << ' ';
+        cout << '\n';
     }
     return 0;
 }

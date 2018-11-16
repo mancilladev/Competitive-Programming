@@ -11,16 +11,18 @@
 
 using namespace std;
 typedef long long ll;
+typedef long double ld;
 typedef pair<int,int> pii;
 
-int main () {
-    ios::sync_with_stdio(false), cin.tie(nullptr);
+int main (void) {
+    ios::sync_with_stdio(false), cin.tie(0);
     cout.precision(10), cout << fixed;
 
-    int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        forn(i, n) cin >> arr[i];
+    int n; cin >> n;
+    while (n--) {
+        ld a, b; cin >> a >> b;
+        ld res = a * log10(2.0) + b * log10(5.0) + 1.0;
+        cout << ll(res) << '\n';
     }
     return 0;
 }

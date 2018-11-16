@@ -22,7 +22,7 @@ template < typename T > ostream &operator << ( ostream & os, const set< T > &v )
 // COUT << MAP
 template < typename F, typename S > ostream &operator << ( ostream & os, const map< F, S > &v ) {os << "["; typename map< F , S >::const_iterator it; for( it = v.begin(); it != v.end(); it++ ) {if( it != v.begin() ) os << ", "; os << it -> first << " = " << it -> second ; } return os << "]"; }
 
-const int INF = (int)1e9 + 7;
+const long long INF = (ll)2e9 + 7;
 const long long LLINF = (ll)4e18 + 7;
 const double pi = acos(-1.0);
 
@@ -32,8 +32,17 @@ int main () {
 
     int n;
     while (cin >> n) {
-        vector<int> arr(n);
+        vector<ll> arr(n);
         forn(i, n) cin >> arr[i];
+
+        ll res = -2e9;
+        vector<ll> dp(n+2, 0);
+        ford(i, n-1) {
+            dp[i] = arr[i] + arr[i+1] + dp[i+2];
+            res = max(res, dp[i]);
+            dp[i] = max(0LL, dp[i]);
+        }
+        cout << res << endl;
     }
     return 0;
 }

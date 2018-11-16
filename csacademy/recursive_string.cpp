@@ -30,10 +30,32 @@ int main () {
     ios::sync_with_stdio(false), cin.tie(nullptr);
     cout.precision(10), cout << fixed;
 
-    int n;
-    while (cin >> n) {
-        vector<int> arr(n);
-        forn(i, n) cin >> arr[i];
+    int n, k;
+    while (cin >> n >> k) {
+        string s = "";
+        deque<string> dp {"a", "b", "c"};
+        vector<ll> cnt(40,0);
+        cnt[0] = cnt[1] = cnt[2] = 1;
+        fore(i, 3, n) cnt[i] = cnt[i-1] + cnt[i-2] + cnt[i-3];
+
+        function<string(int,int)> solve = [&](const int n, const int k) {
+            if (cnt[n] < k) return string("-1");
+
+            if (n < 3) return string(1, "abc"[n]);
+
+            int _k = k;
+            fore(i, 1, 3) {
+                if (_k > cnt[n-i]) {
+                    _k -= cnt[n-i];
+                } else {
+                    return string(solve(n-i, _k));
+                }
+            }
+            assert(false);
+            return string("-1");
+        };
+
+        cout << solve(n, k) << endl;
     }
     return 0;
 }

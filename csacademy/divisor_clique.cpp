@@ -13,14 +13,26 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> pii;
 
-int main () {
-    ios::sync_with_stdio(false), cin.tie(nullptr);
+int main (void) {
+    ios::sync_with_stdio(false), cin.tie(0);
     cout.precision(10), cout << fixed;
 
     int n;
     while (cin >> n) {
-        vector<int> arr(n);
+        vector<int> arr(n), best(n,0);
         forn(i, n) cin >> arr[i];
+        sort(all(arr));
+
+        forn(i, n) {
+            int cnt = 0;
+            forn(j, i) {
+                if (arr[i] % arr[j] == 0) {
+                    cnt = max(cnt, best[j]);
+                }
+            }
+            best[i] = cnt + 1;
+        }
+        cout << *max_element(all(best)) << endl;
     }
     return 0;
 }
